@@ -38,6 +38,39 @@ namespace Tipus_de_dades
 
 
             Debug.WriteLine("Hello World estic depurant");
+
+
+
+            ///--------------------------------
+            /// Strings
+            /// 
+            String nomICognoms = "Paco";
+            nomICognoms = nomICognoms + " Sánchez";
+            int lletres = nomICognoms.Length;
+            txtSortida.Text = nomICognoms + "\n";
+            txtSortida.Text += lletres.ToString() + "\n";
+            txtSortida.Text += lletres + "" + "\n";
+            //int i;
+            //for (i = 0; i < nom.Length && nom[i] != ' '; i++);
+            // 01234567890123
+            // Maria Sánchez
+            int i1 = nomICognoms.IndexOf("ar");//1
+            int i2 = nomICognoms.IndexOf(' ');//5
+            int i3 = nomICognoms.IndexOf('a', 2);//4
+            int i4 = nomICognoms.IndexOf('k');// -1
+
+            string test = nomICognoms.Substring(1, 3);//ari
+            string nom = nomICognoms.Substring(0, nomICognoms.IndexOf(' '));
+            txtSortida.Text += nom + "\n";
+            string NIF = "   11111111-H  ";
+            NIF = NIF.Trim();
+            txtSortida.Text += NIF + "\n" ;
+            NIF = NIF.Remove(NIF.IndexOf("-"), 1);
+            txtSortida.Text += NIF + "\n";
+
+            String frase = "Hola bon dia que tal esteu?";
+
+
         }
     }
 }

@@ -13,6 +13,7 @@
         <TextBox
             x:Name="txtSortida"
             HorizontalAlignment="Stretch" 
+            AcceptsReturn="True"
             VerticalAlignment="Stretch"
                  Background="Azure"></TextBox>
     </Grid>
