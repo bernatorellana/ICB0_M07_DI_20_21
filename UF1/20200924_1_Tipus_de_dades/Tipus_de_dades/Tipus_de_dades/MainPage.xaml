@@ -9,12 +9,17 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel Orientation="Vertical">
+        <ComboBox
+            x:Name="cboDOTW"
+            Background="Lime"></ComboBox>
         <TextBox
             x:Name="txtSortida"
             HorizontalAlignment="Stretch" 
             AcceptsReturn="True"
-            VerticalAlignment="Stretch"
-                 Background="Azure"></TextBox>
-    </Grid>
+            VerticalAlignment="Top"
+                 Background="Azure" Margin="0,0,0,0" Height="391" >
+            
+        </TextBox>
+    </StackPanel>
 </Page>
