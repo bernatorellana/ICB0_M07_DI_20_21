@@ -10,9 +10,27 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Orientation="Vertical">
-        <ComboBox
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="txtNumero"></TextBox>
+            <Button Content="??" Click="Button_Click"></Button>
+            <TextBlock x:Name="txbNumero"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Seleccioni idioma:"
+                       VerticalAlignment="Center"></TextBlock>
+            <ComboBox
+            x:Name="cboIdioma"
+            Background="Lime"
+                SelectionChanged="cboIdioma_SelectionChanged"
+                ></ComboBox>
+            <TextBlock Margin="20 0 0 0" 
+                       Text="Seleccioni dia de la setmana:"
+                       VerticalAlignment="Center"></TextBlock>
+            <ComboBox
             x:Name="cboDOTW"
             Background="Lime"></ComboBox>
+            
+        </StackPanel>
         <TextBox
             x:Name="txtSortida"
             HorizontalAlignment="Stretch" 

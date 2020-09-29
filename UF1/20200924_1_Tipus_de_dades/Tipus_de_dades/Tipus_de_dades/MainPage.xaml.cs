@@ -123,7 +123,8 @@ namespace Tipus_de_dades
              "en-UK"
              "fr-FR"
             */
-
+            string[] codisIdioma = { "ca-ES", "en-UK", "fr-FR" , "tr-TR"};
+            cboIdioma.ItemsSource = codisIdioma;
 
         }
 
@@ -153,6 +154,45 @@ namespace Tipus_de_dades
             return sortida;
         }
 
+        private void cboIdioma_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string codiIdioma = ""+cboIdioma.SelectedValue;
+            string[] diesSetmana = getDiesSetmana(codiIdioma);
+            cboDOTW.ItemsSource = diesSetmana;
 
-    }
-}
+        }// page load
+
+
+
+        private string[] getDiesSetmana(string codiIdioma)
+        {
+            CultureInfo ci = new CultureInfo(codiIdioma);
+            DateTime dilluns = new DateTime(2020, 09, 28);
+            string[] nomsDiesSetmana = new string[7];
+            for (int i = 0; i < nomsDiesSetmana.Length; i++)
+            {
+                nomsDiesSetmana[i] = dilluns.AddDays(i).ToString("dddd", ci);
+            }
+            return nomsDiesSetmana;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int numero = Int32.Parse(txtNumero.Text);
+                txbNumero.Text = numero.ToString();
+
+            }
+            catch(Exception ex)
+            {
+                txbNumero.Text = "Ruc, posa un número";
+            }
+
+            
+        }
+    } // class
+
+
+
+} //namespace
