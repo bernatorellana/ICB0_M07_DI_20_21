@@ -54,14 +54,55 @@ namespace DemoControl_i_classes
 
             //----------------------------------
             Persona p1 = new Persona(1, "11111111H", "Maria"); 
-            Persona p2 = new Persona(2, "12345678Z", "Joan");
-            Persona p3 = new Persona(3, "XXXX", "ccc");
+            Persona p2 = new Persona(2, "12345678Z", "Joanola");
+            Persona p3 = new Persona(3, "22222222J", "Anabel");
+            //----------------------------------
 
-            
+            List<Persona> llistaPersones = new List<Persona>();
+            Debug.WriteLine(llistaPersones.Count);
+            llistaPersones.Add(p1);
+            llistaPersones.Add(p2);
+            llistaPersones.Add(p3);
+            foreach(Persona p in llistaPersones)
+            {
+                Debug.WriteLine(">" + p.Id + " " + p.Nom);
+            }
 
-            p1.Id = 1;       
-            int idDelPaio1 = p1.Id;
-            p1.Id = -1;
+            Debug.WriteLine(llistaPersones.Count);
+            //----------------------------------------------
+            //llistaPersones.RemoveAt(0);
+            llistaPersones.Remove(p1);
+            for(int i=0;i< llistaPersones.Count; i++)
+            {
+                Persona p = llistaPersones[i];
+                Debug.WriteLine(">" + p.Id + " " + p.Nom);
+            }
+            //-----------------------------------------------
+            Debug.WriteLine("p2 existeix?" + llistaPersones.Contains(p2));
+
+            Persona p2bis = new Persona(2, "12345678Z", "Joanola");
+            Debug.WriteLine("p2 existeix?" + llistaPersones.Contains(p2bis));
+            //-----------------------------------------------
+            Dictionary<Int32, String> equip = new Dictionary<Int32, string>();
+            equip[10] = "Messi";
+            equip[3] = "Piquè";
+            Dictionary<String, Int32> noms = new Dictionary<String, Int32>();
+            noms["Messi"] = 10;
+            noms["Pique"] = 3;
+            noms["Dembelè"] = 3;
+            //---------------------------------------
+            Debug.WriteLine(noms["Messi"]);
+            if (noms.ContainsKey("Dembelè"))
+            {
+                Debug.WriteLine(noms["Dembelè"]);
+            } else
+            {
+                Debug.WriteLine("Dembelè not found exception");
+            }
+            //---------------------------------------
+
+
+
 
         }
     }

@@ -9,17 +9,20 @@ namespace DemoControl_i_classes
 {
     class Persona
     {
+        // atributs
         private int id;
         private string nif;
         private string nom;
 
-        public Persona(int pId, string pNIF, string pNom)
+        public Persona(int id, string nif, string nom)
         {
-            this.Id = pId;
-            this.Nif = pNIF;
-            this.Nom = pNom;
+            Id = id;
+            Nom = nom;
+            Nif = nif;
         }
 
+      
+        // Properties
         public int Id {
             get
             {
@@ -65,14 +68,14 @@ namespace DemoControl_i_classes
             /// Versió 1: casolà
             /// 
             /// 
-            /*if (pNif.Length != 9) return false;
+            if (pNif.Length != 9) return false;
             for(int i=0;i<8;i++)
             {
                 if (pNif[i] < '0' || pNif[i] > '9') return false;
             }
             if ("MYFPDXBNJZSQVHLCKE".IndexOf(pNif[8])<0) return false;
             
-            return true;*/
+            return true;
             /// --------------------------------------------
             /// Versió 2: RegularExpression
             /// 
@@ -89,7 +92,7 @@ namespace DemoControl_i_classes
             /// --------------------------------------------
             /// Versió 3: StackOverflow (Powered by Dani)
             /// 
-            return validDNIDownloaded(pNif);
+            //return validDNIDownloaded(pNif);
         }
 
         
@@ -146,5 +149,16 @@ namespace DemoControl_i_classes
 
         }
 
-    }
-}
+        public override bool Equals(object obj)
+        {
+            var persona = obj as Persona;
+            return persona != null &&
+                   Id == persona.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return 2108858624 + Id.GetHashCode();
+        }
+    }// end class
+} //end namespace
