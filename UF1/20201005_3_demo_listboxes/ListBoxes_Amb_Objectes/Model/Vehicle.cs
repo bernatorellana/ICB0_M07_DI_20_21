@@ -31,9 +31,24 @@ namespace ListBoxes_Amb_Objectes.Model
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            var vehicle = obj as Vehicle;
+            return vehicle != null &&
+                   Matricula == vehicle.Matricula;
+        }
+
+        public override int GetHashCode()
+        {
+            return -388471697 + EqualityComparer<string>.Default.GetHashCode(Matricula);
+        }
+
         public override string ToString()
         {
             return Matricula + ">" + Marca + " " + Model;
         }
+
+
+
     }
 }

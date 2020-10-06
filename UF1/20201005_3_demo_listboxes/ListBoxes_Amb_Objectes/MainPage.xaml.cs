@@ -27,6 +27,7 @@ namespace ListBoxes_Amb_Objectes
     {
 
         private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
+        private ObservableCollection<string> marques = new ObservableCollection<string>();
 
 
         public MainPage()
@@ -46,7 +47,14 @@ namespace ListBoxes_Amb_Objectes
             //--------------------------------------------
             lsbVehicles.ItemsSource = vehicles;
             lsbVehicles.DisplayMemberPath = "NomComplet";
+            //---------------------------------------------
 
+            marques.Add("Seat");
+            marques.Add("VW");
+            marques.Add("Audi");
+            marques.Add("Skoda");
+            marques.Add("Ferrari");
+            cboMarques.ItemsSource = marques;
 
         }
 
@@ -55,6 +63,8 @@ namespace ListBoxes_Amb_Objectes
             string matricula = txtMatricula.Text;
             Vehicle nou = new Vehicle(matricula, "Seat", "Leon");
             vehicles.Add(nou);
+            txtMatricula.Text = "";
+            
             // 
             //lsbVehicles.ItemsSource = null;
             //lsbVehicles.ItemsSource = vehicles;
@@ -62,13 +72,30 @@ namespace ListBoxes_Amb_Objectes
 
         private void txtMatricula_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool matriculaValida =verificaMatriculaHechaPorDani(txtMatricula.Text);
+            //txtMatricula.Text = txtMatricula.Text.ToUpper();
+            bool matriculaValida =verificaMatriculaHechaPorDani(
+                txtMatricula.Text);
+            if(matriculaValida)
+            {
+                matriculaValida = !(vehicles.Contains(new Vehicle(txtMatricula.Text, "dummy", "dummy")));
+                     
+
+                // existeix la matrícula?
+                /*foreach (Vehicle v in vehicles)
+                {
+                    if (v.Matricula.Equals(txtMatricula.Text))
+                    {
+                        matriculaValida = false;
+                        break;
+                    }
+                }*/
+            }
             btnAlta.IsEnabled = matriculaValida;
         }
 
         private bool verificaMatriculaHechaPorDani(string text)
         {
-            return  Regex.Match(text, "[0-9]{4}[QWRTYPSDFGHJKLZXCVBNM]{3}", RegexOptions.IgnoreCase).Success;
+            return  Regex.Match(text, "^[0-9]{4}[QWRTYPSDFGHJKLZXCVBNM]{3}$", RegexOptions.IgnoreCase).Success;
         }
     }
 }

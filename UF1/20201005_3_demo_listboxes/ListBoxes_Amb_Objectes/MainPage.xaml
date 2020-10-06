@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -26,6 +27,7 @@
             <ListBoxItem>Tres</ListBoxItem>
         </ListBox>
         <TextBox x:Name="txtMatricula"
+                 CharacterCasing="Upper"
             PlaceholderText="Introduir una matrícula"
                  TextChanged="txtMatricula_TextChanged"
                  Grid.Column="0" Grid.Row="1"
@@ -37,10 +39,28 @@
                 Margin="10"
                 IsEnabled="False"
                 Click="Button_Click"></Button>
-        <StackPanel Grid.Column="2" Grid.RowSpan="2"
+        <StackPanel Grid.Column="2" Grid.RowSpan="3"
                     Background="Lime">
-            <Image Source="https://www.24horas.cl/incoming/chuckjpg-2552333/ALTERNATES/BASE_LANDSCAPE/chuck.jpg"></Image>
+            <Image Source="http://www.vacationnortheastusa.com/wp-content/uploads/2019/01/1-300x201.jpg"></Image>
         </StackPanel>
+        <Grid  Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Marca:"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Column="0"></TextBlock>
+            <ComboBox x:Name="cboMarques"
+                Grid.Column="1"
+                      VerticalAlignment="Center"
+                  HorizontalAlignment="Stretch"
+                  Margin="10">
+            <ComboBoxItem>Primer</ComboBoxItem>
+            <ComboBoxItem>Segon</ComboBoxItem>
+        </ComboBox>
+        </Grid>
     </Grid>
     <!--<StackPanel Orientation="Vertical">
         <ListBox x:Name="lsbVehicles">
