@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -77,9 +78,16 @@ namespace ListBoxes_Amb_Objectes
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string matricula = txtMatricula.Text;
-            Vehicle nou = new Vehicle(matricula, "Seat", "Leon");
+            Vehicle nou = new Vehicle(matricula,
+                cboMarques.SelectedValue.ToString(), 
+                cboModels.SelectedValue.ToString());
             vehicles.Add(nou);
+
+            // Neteja la matrícula
             txtMatricula.Text = "";
+            // Netejar model i marca
+            cboMarques.SelectedIndex = -1;
+            cboModels.SelectedIndex = -1;
             
             // 
             //lsbVehicles.ItemsSource = null;
@@ -88,25 +96,7 @@ namespace ListBoxes_Amb_Objectes
 
         private void txtMatricula_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //txtMatricula.Text = txtMatricula.Text.ToUpper();
-            bool matriculaValida =verificaMatriculaHechaPorDani(
-                txtMatricula.Text);
-            if(matriculaValida)
-            {
-                matriculaValida = !(vehicles.Contains(new Vehicle(txtMatricula.Text, "dummy", "dummy")));
-                     
-
-                // existeix la matrícula?
-                /*foreach (Vehicle v in vehicles)
-                {
-                    if (v.Matricula.Equals(txtMatricula.Text))
-                    {
-                        matriculaValida = false;
-                        break;
-                    }
-                }*/
-            }
-            btnAlta.IsEnabled = matriculaValida;
+            validaDadesCotxe();
         }
 
         private bool verificaMatriculaHechaPorDani(string text)
@@ -116,7 +106,74 @@ namespace ListBoxes_Amb_Objectes
 
         private void cboMarques_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cboModels.ItemsSource = modelsPerMarca[cboMarques.SelectedValue.ToString()];
+            if (cboMarques.SelectedValue != null)
+            {
+                cboModels.ItemsSource = modelsPerMarca[cboMarques.SelectedValue.ToString()];                
+            }
+            validaDadesCotxe();
+        }
+
+
+        private Boolean validaDadesCotxe()
+        {
+            bool valid = false;
+            String error = "";
+            // valida matricula
+            bool matriculaValida = verificaMatriculaHechaPorDani(
+                txtMatricula.Text);
+
+            if (matriculaValida)
+            {
+                matriculaValida = !(vehicles.Contains(new Vehicle(txtMatricula.Text, "dummy", "dummy")));
+                if(!matriculaValida)
+                {
+                    error = "Cotxe repetit.";
+                }
+                // existeix la matrícula?
+                /*foreach (Vehicle v in vehicles)
+                {
+                    if (v.Matricula.Equals(txtMatricula.Text))
+                    {
+                        matriculaValida = false;
+                        break;
+                    }
+                }*/
+            } else if(txtMatricula.Text.Length>0)
+            {
+                error = "Format de matricula erroni.";
+            }
+            if(!matriculaValida)
+            {
+                tbkErrorMatricula.Text =  error;
+                txtMatricula.Background = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                tbkErrorMatricula.Text = "";
+                txtMatricula.Background = new SolidColorBrush(Colors.Transparent);
+            }
+
+
+            if (matriculaValida)
+            {
+                // valida marca
+                bool marcaValida = cboMarques.SelectedIndex != -1;
+                if (marcaValida)
+                {
+                    // valida model
+                    bool modelValid = cboModels.SelectedIndex != -1;
+                    valid = modelValid;
+                }
+            }
+            btnAlta.IsEnabled = valid;
+
+            return valid;
+            //return matriculaValida && marcaValida && modelValid;
+        }
+
+        private void cboModels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            validaDadesCotxe();
         }
     }
 }

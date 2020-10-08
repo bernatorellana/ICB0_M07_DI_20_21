@@ -26,12 +26,7 @@
             <ListBoxItem>Dos</ListBoxItem>
             <ListBoxItem>Tres</ListBoxItem>
         </ListBox>
-        <TextBox x:Name="txtMatricula"
-                 CharacterCasing="Upper"
-            PlaceholderText="Introduir una matrícula"
-                 TextChanged="txtMatricula_TextChanged"
-                 Grid.Column="0" Grid.Row="1"
-                 Margin="10"></TextBox>
+        
         <Button x:Name="btnAlta" 
             Content="Alta" Grid.Column="1" Grid.Row="1"
                 HorizontalAlignment="Stretch"
@@ -43,38 +38,61 @@
                     Background="Lime">
             <Image Source="http://www.vacationnortheastusa.com/wp-content/uploads/2019/01/1-300x201.jpg"></Image>
         </StackPanel>
-        <Grid  Grid.Column="0" Grid.Row="2">
+        <Grid  Grid.Column="0" Grid.Row="1"  Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Marca:"
-                       Grid.Row="0"
+            <TextBlock Text="Matricula(*):"
+                           Grid.Row="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Column="0"></TextBlock>
+            
+            <TextBox x:Name="txtMatricula"
+                 CharacterCasing="Upper"
+                     VerticalAlignment="Center"
+            PlaceholderText="Introduir una matrícula"
+                 TextChanged="txtMatricula_TextChanged"
+                 Grid.Column="1" Grid.Row="0"
+                 Margin="10"></TextBox>
+
+            <TextBlock x:Name="tbkErrorMatricula"
+                       TextWrapping="WrapWholeWords"
+                       Text=""
+                       Foreground="Red" Grid.Column="2"
+                       VerticalAlignment="Center"></TextBlock>
+
+            <TextBlock Text="Marca(*):"
+                       Grid.Row="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Grid.Column="0"></TextBlock>
             <ListBox x:Name="cboMarques"
                   Grid.Column="1"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Stretch"
                   SelectionChanged="cboMarques_SelectionChanged"
                   Margin="10">
             </ListBox>
 
-            <TextBlock Text="Model:"
-                           Grid.Row="1"
+            <TextBlock Text="Model(*):"
+                           Grid.Row="2"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Grid.Column="0"></TextBlock>
             <ComboBox x:Name="cboModels"
-                Grid.Column="1"
-                          Grid.Row="1"
-                      VerticalAlignment="Center"
+                  SelectionChanged="cboModels_SelectionChanged"
+                  Grid.Column="1"
+                  Grid.Row="2"
+                  VerticalAlignment="Center"
                   HorizontalAlignment="Stretch"
                   Margin="10">
                     <ComboBoxItem>Primer</ComboBoxItem>
