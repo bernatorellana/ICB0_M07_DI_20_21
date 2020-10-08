@@ -11,9 +11,9 @@
     >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -48,16 +48,36 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="4*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
             <TextBlock Text="Marca:"
+                       Grid.Row="0"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Grid.Column="0"></TextBlock>
-            <ComboBox x:Name="cboMarques"
+            <ListBox x:Name="cboMarques"
+                  Grid.Column="1"
+                  Grid.Row="0"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Stretch"
+                  SelectionChanged="cboMarques_SelectionChanged"
+                  Margin="10">
+            </ListBox>
+
+            <TextBlock Text="Model:"
+                           Grid.Row="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Column="0"></TextBlock>
+            <ComboBox x:Name="cboModels"
                 Grid.Column="1"
+                          Grid.Row="1"
                       VerticalAlignment="Center"
                   HorizontalAlignment="Stretch"
                   Margin="10">
-            <ComboBoxItem>Primer</ComboBoxItem>
+                    <ComboBoxItem>Primer</ComboBoxItem>
             <ComboBoxItem>Segon</ComboBoxItem>
         </ComboBox>
         </Grid>

@@ -28,6 +28,7 @@ namespace ListBoxes_Amb_Objectes
 
         private ObservableCollection<Vehicle> vehicles = new ObservableCollection<Vehicle>();
         private ObservableCollection<string> marques = new ObservableCollection<string>();
+        private Dictionary<String, List<String>> modelsPerMarca = new Dictionary<String, List<String>>();
 
 
         public MainPage()
@@ -49,14 +50,29 @@ namespace ListBoxes_Amb_Objectes
             lsbVehicles.DisplayMemberPath = "NomComplet";
             //---------------------------------------------
 
-            marques.Add("Seat");
+            /*marques.Add("Seat");
             marques.Add("VW");
             marques.Add("Audi");
             marques.Add("Skoda");
             marques.Add("Ferrari");
-            cboMarques.ItemsSource = marques;
+            cboMarques.ItemsSource = marques;*/
+            //------------------------------
+            //         "Seat"--> {"Leon", "Altea", "Ibiza"}
+            //           |            |
+            List<String> llistaSeat = new List<String>();
+            llistaSeat.Add("Leon");
+            llistaSeat.Add("Ibiza");
+            llistaSeat.Add("Alhambra");
+            llistaSeat.Add("Exeo");
+            modelsPerMarca["Seat"] = llistaSeat;
+            //-------------------------------------------------------
+            modelsPerMarca["VW"] = new List<String>() {"Passat", "Golf", "Tuareg", "Scirocco" };
+            modelsPerMarca["Audi"] = new List<String>() {"A3", "A4", "A5", "A6" };
 
-        }
+            cboMarques.ItemsSource = modelsPerMarca.Keys;
+            
+
+         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -96,6 +112,11 @@ namespace ListBoxes_Amb_Objectes
         private bool verificaMatriculaHechaPorDani(string text)
         {
             return  Regex.Match(text, "^[0-9]{4}[QWRTYPSDFGHJKLZXCVBNM]{3}$", RegexOptions.IgnoreCase).Success;
+        }
+
+        private void cboMarques_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cboModels.ItemsSource = modelsPerMarca[cboMarques.SelectedValue.ToString()];
         }
     }
 }
