@@ -21,10 +21,9 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <!-- Contingut de la taula-->
-        <ListBox x:Name="lsbVehicles" Grid.ColumnSpan="2">
-            <ListBoxItem>Un</ListBoxItem>
-            <ListBoxItem>Dos</ListBoxItem>
-            <ListBoxItem>Tres</ListBoxItem>
+        <ListBox x:Name="lsbVehicles" Grid.ColumnSpan="2"
+                 SelectionChanged="lsbVehicles_SelectionChanged">
+            
         </ListBox>
         
         <Button x:Name="btnAlta" 
@@ -33,7 +32,16 @@
                 VerticalAlignment="Stretch"
                 Margin="10"
                 IsEnabled="False"
+                Height="60"
                 Click="Button_Click"></Button>
+        <Button x:Name="btnBaixa" Grid.Column="1" Grid.Row="2" Content="Baixa"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Stretch"
+                Margin="10"
+                Click="btnBaixa_Click"
+                Height="60">
+            
+        </Button>
         <StackPanel Grid.Column="2" Grid.RowSpan="3"
                     Background="Lime">
             <Image Source="http://www.vacationnortheastusa.com/wp-content/uploads/2019/01/1-300x201.jpg"></Image>

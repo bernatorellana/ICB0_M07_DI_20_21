@@ -71,7 +71,8 @@ namespace ListBoxes_Amb_Objectes
             modelsPerMarca["Audi"] = new List<String>() {"A3", "A4", "A5", "A6" };
 
             cboMarques.ItemsSource = modelsPerMarca.Keys;
-            
+
+            btnBaixa.IsEnabled = false;
 
          }
 
@@ -99,10 +100,7 @@ namespace ListBoxes_Amb_Objectes
             validaDadesCotxe();
         }
 
-        private bool verificaMatriculaHechaPorDani(string text)
-        {
-            return  Regex.Match(text, "^[0-9]{4}[QWRTYPSDFGHJKLZXCVBNM]{3}$", RegexOptions.IgnoreCase).Success;
-        }
+
 
         private void cboMarques_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -116,11 +114,13 @@ namespace ListBoxes_Amb_Objectes
 
         private Boolean validaDadesCotxe()
         {
+
+           
+
             bool valid = false;
             String error = "";
             // valida matricula
-            bool matriculaValida = verificaMatriculaHechaPorDani(
-                txtMatricula.Text);
+            bool matriculaValida = Vehicle.validaMatricula(txtMatricula.Text);
 
             if (matriculaValida)
             {
@@ -174,6 +174,22 @@ namespace ListBoxes_Amb_Objectes
         private void cboModels_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             validaDadesCotxe();
+        }
+
+        private void btnBaixa_Click(object sender, RoutedEventArgs e)
+        {
+            if(lsbVehicles.SelectedValue!=null)
+            {
+                //Vehicle v = (Vehicle)lsbVehicles.SelectedValue;                
+                //vehicles.Remove(v);
+                //---------------------------
+                vehicles.RemoveAt(lsbVehicles.SelectedIndex);
+            }
+        }
+
+        private void lsbVehicles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnBaixa.IsEnabled = lsbVehicles.SelectedValue != null;
         }
     }
 }
