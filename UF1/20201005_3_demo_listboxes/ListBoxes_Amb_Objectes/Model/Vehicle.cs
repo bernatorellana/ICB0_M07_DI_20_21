@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,7 +16,7 @@ namespace ListBoxes_Amb_Objectes.Model
         private string marca;
         private string model;
         private string matricula;
-        private List<Usuari> usuaris;
+        private ObservableCollection<Usuari> usuaris;
 
 
         public Vehicle(string matricula, string marca, string model)
@@ -25,7 +26,7 @@ namespace ListBoxes_Amb_Objectes.Model
             Model = model;
             //-------------
             // inicialitzem la llista
-            usuaris = new List<Usuari>();
+            usuaris = new ObservableCollection<Usuari>();
         }
 
         // Només pot haver-hi 3 usuaris com a màxim
@@ -37,6 +38,11 @@ namespace ListBoxes_Amb_Objectes.Model
              usuaris.Add(nouUsuari);
             return true;
         }
+
+        /// <summary>
+        /// Llista d'usuaris (només lectura)
+        /// </summary>
+        public ObservableCollection<Usuari> Usuaris { get => usuaris; }
 
         public int GetNumeroUsuaris()
         {
@@ -64,6 +70,7 @@ namespace ListBoxes_Amb_Objectes.Model
                 return Matricula + ">" + Marca + " " + Model;
             }
         }
+
 
         public override bool Equals(object obj)
         {

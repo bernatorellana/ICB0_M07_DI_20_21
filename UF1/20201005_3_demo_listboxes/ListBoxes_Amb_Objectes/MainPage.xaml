@@ -11,6 +11,7 @@
     >
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
@@ -18,35 +19,43 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center">VEHICLES</TextBlock>
+        <TextBlock Grid.Column="3" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center">USUARIS</TextBlock>
         <!-- Contingut de la taula-->
-        <ListBox x:Name="lsbVehicles" Grid.ColumnSpan="2"
+        <ListBox x:Name="lsbVehicles" Grid.ColumnSpan="2" Grid.Row="1"
                  SelectionChanged="lsbVehicles_SelectionChanged">
             
         </ListBox>
+
+        <ListBox x:Name="lsbUsuaris" Grid.Column="3" Grid.Row="1"
+                 Margin="10"></ListBox>
         
         <Button x:Name="btnAlta" 
-            Content="Alta" Grid.Column="1" Grid.Row="1"
+            Content="Alta" Grid.Column="1" Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Margin="10"
                 IsEnabled="False"
                 Height="60"
                 Click="Button_Click"></Button>
-        <Button x:Name="btnBaixa" Grid.Column="1" Grid.Row="2" Content="Baixa"
+        <Button x:Name="btnBaixa" Grid.Column="1" Grid.Row="3" Content="Baixa"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch"
                 Margin="10"
                 Click="btnBaixa_Click"
                 Height="60">
-            
         </Button>
-        <StackPanel Grid.Column="2" Grid.RowSpan="3"
+        
+        <StackPanel Grid.Column="5" Grid.RowSpan="4"
                     Background="Lime">
             <Image Source="http://www.vacationnortheastusa.com/wp-content/uploads/2019/01/1-300x201.jpg"></Image>
         </StackPanel>
-        <Grid  Grid.Column="0" Grid.Row="1"  Grid.RowSpan="2">
+        <Grid  Grid.Column="0" Grid.Row="2"  Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>

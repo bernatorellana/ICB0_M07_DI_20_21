@@ -50,6 +50,17 @@ namespace ListBoxes_Amb_Objectes
             lsbVehicles.ItemsSource = vehicles;
             lsbVehicles.DisplayMemberPath = "NomComplet";
             //---------------------------------------------
+            Usuari u1 = new Usuari(1, "Maria");
+            Usuari u2 = new Usuari(2, "Joan");
+            Usuari u3 = new Usuari(3, "Cristina");
+            Usuari u4 = new Usuari(4, "Pep");
+            v1.AfegirUsuari(u1);
+            v1.AfegirUsuari(u2);
+            v2.AfegirUsuari(u3);
+            v3.AfegirUsuari(u4);
+            //---------------------------------------------
+            lsbUsuaris.DisplayMemberPath = "Nom";
+            //---------------------------------------------
 
             /*marques.Add("Seat");
             marques.Add("VW");
@@ -190,6 +201,13 @@ namespace ListBoxes_Amb_Objectes
         private void lsbVehicles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnBaixa.IsEnabled = lsbVehicles.SelectedValue != null;
+            Vehicle vehicleSeleccionat = (Vehicle) lsbVehicles.SelectedValue;
+            // Carreguem els usuaris del 
+            // vehicle seleccionat (si n'hi ha un , és clar! )
+            if(vehicleSeleccionat!=null)
+            {
+                lsbUsuaris.ItemsSource = vehicleSeleccionat.Usuaris;
+            }
         }
     }
 }
