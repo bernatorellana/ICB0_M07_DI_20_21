@@ -17,7 +17,8 @@ namespace ListBoxes_Amb_Objectes.Model
         private string model;
         private string matricula;
         private ObservableCollection<Usuari> usuaris;
-
+        private int tipusAsseguranca;
+        private List<string> extres;
 
         public Vehicle(string matricula, string marca, string model)
         {
@@ -27,6 +28,19 @@ namespace ListBoxes_Amb_Objectes.Model
             //-------------
             // inicialitzem la llista
             usuaris = new ObservableCollection<Usuari>();
+            extres = new List<string>();
+        }
+
+        public List<string> Extres { get => extres;  }
+
+        public bool afegirExtra(String codi)
+        {
+            if (!extres.Contains(codi))
+            {
+                extres.Add(codi);
+                return true;
+            }
+            return false;
         }
 
         // Només pot haver-hi 3 usuaris com a màxim
@@ -42,7 +56,9 @@ namespace ListBoxes_Amb_Objectes.Model
         /// <summary>
         /// Llista d'usuaris (només lectura)
         /// </summary>
-        public ObservableCollection<Usuari> Usuaris { get => usuaris; }
+        public ObservableCollection<Usuari> Usuaris {
+            get => usuaris;
+        }
 
         public int GetNumeroUsuaris()
         {
@@ -68,6 +84,14 @@ namespace ListBoxes_Amb_Objectes.Model
             get
             {
                 return Matricula + ">" + Marca + " " + Model;
+            }
+        }
+
+        public int TipusAsseguranca { get => tipusAsseguranca;
+            set
+            {
+                if (value < 0 || value > 2) throw new Exception("Tipus assegurança invàlid");
+                tipusAsseguranca = value;
             }
         }
 

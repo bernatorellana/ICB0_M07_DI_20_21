@@ -90,9 +90,24 @@ namespace ListBoxes_Amb_Objectes
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string matricula = txtMatricula.Text;
+            /*
+             * cerca del radiobutton seleccionat en una taula
+            int tipusAsseguranca;
+            int i;
+            RadioButton[] radios = { rdoAssTercers, rdoAssTotRisc, rdoAssFranquicia };
+            for ( i = 0; i < radios.Length && !radios[i].IsChecked.Value; i++);
+            tipusAsseguranca = i;
+            */
+            // Cerca manual del radiobutton: casolà pero CUTREEEEEEEEEEE
+            /*if (rdoAssTercers.IsChecked.Value) tipusAsseguranca = 0;
+            else if (rdoAssTotRisc.IsChecked.Value) tipusAsseguranca = 1;
+            else if (rdoAssFranquicia.IsChecked.Value) tipusAsseguranca = 2;*/
+
             Vehicle nou = new Vehicle(matricula,
                 cboMarques.SelectedValue.ToString(), 
                 cboModels.SelectedValue.ToString());
+            nou.TipusAsseguranca = assegurancaSeleccionada;
+
             vehicles.Add(nou);
 
             // Neteja la matrícula
@@ -100,7 +115,19 @@ namespace ListBoxes_Amb_Objectes
             // Netejar model i marca
             cboMarques.SelectedIndex = -1;
             cboModels.SelectedIndex = -1;
-            
+
+            // Netejar tipus d'assegurança
+            foreach(object o in stpAsseguranca.Children)
+            {
+                if (o is RadioButton)
+                {
+                    RadioButton rb = (RadioButton)o;
+                    rb.IsChecked = false;
+                }
+            }
+            /*rdoAssFranquicia.IsChecked = false;
+            rdoAssTercers.IsChecked = false;
+            rdoAssTotRisc.IsChecked = false;*/
             // 
             //lsbVehicles.ItemsSource = null;
             //lsbVehicles.ItemsSource = vehicles;
@@ -176,6 +203,16 @@ namespace ListBoxes_Amb_Objectes
                     valid = modelValid;
                 }
             }
+
+            // mirem si hi ha el tipus d'assegurança seleccionat
+            if( !rdoAssFranquicia.IsChecked.Value &&
+                !rdoAssTercers.IsChecked.Value &&
+                !rdoAssTotRisc.IsChecked.Value) {
+                valid = false;
+            }
+
+
+
             btnAlta.IsEnabled = valid;
 
             return valid;
@@ -208,6 +245,18 @@ namespace ListBoxes_Amb_Objectes
             {
                 lsbUsuaris.ItemsSource = vehicleSeleccionat.Usuaris;
             }
+        }
+
+        private int assegurancaSeleccionada = -1;
+
+        private void rdoAssTercers_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            if(rb.IsChecked.Value)
+            {
+                assegurancaSeleccionada = Int32.Parse( (string)rb.Tag);
+            }
+            validaDadesCotxe();
         }
     }
 }

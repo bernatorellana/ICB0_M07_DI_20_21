@@ -65,6 +65,9 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Matricula(*):"
                            Grid.Row="0"
@@ -115,6 +118,29 @@
                     <ComboBoxItem>Primer</ComboBoxItem>
             <ComboBoxItem>Segon</ComboBoxItem>
         </ComboBox>
+            <TextBlock Text="Assegurança" 
+                       Grid.Column="0" Grid.Row="3" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"></TextBlock>
+            <StackPanel Grid.Column="1" Grid.Row="3"
+                        x:Name="stpAsseguranca"
+                        Orientation="Horizontal">
+                
+                <RadioButton Tag="0" GroupName="tipusAsseguranca" Checked="rdoAssTercers_Checked" Unchecked="rdoAssTercers_Checked" Content="A tercers" x:Name="rdoAssTercers"></RadioButton>
+                <RadioButton Tag="1" GroupName="tipusAsseguranca" Checked="rdoAssTercers_Checked" Unchecked="rdoAssTercers_Checked" Content="Tot risc" x:Name="rdoAssTotRisc"></RadioButton>
+                <RadioButton Tag="2" GroupName="tipusAsseguranca" Checked="rdoAssTercers_Checked" Unchecked="rdoAssTercers_Checked" Content="Tot risc amb franquicia" x:Name="rdoAssFranquicia"></RadioButton>
+            </StackPanel>
+            <TextBlock Text="Extres" 
+                       Grid.Column="0" Grid.Row="4" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"></TextBlock>
+            <StackPanel Grid.Column="1" Grid.Row="4"
+                        Orientation="Vertical">
+                <CheckBox  Content="Cadireta infantil" x:Name="chkExtraCad"></CheckBox>
+                <CheckBox  Content="GPS" x:Name="chkExtraGPS"></CheckBox>
+                <CheckBox  Content="Sostre solar" x:Name="chkExtraSS"></CheckBox>
+            </StackPanel>            
+            
         </Grid>
     </Grid>
     <!--<StackPanel Orientation="Vertical">
