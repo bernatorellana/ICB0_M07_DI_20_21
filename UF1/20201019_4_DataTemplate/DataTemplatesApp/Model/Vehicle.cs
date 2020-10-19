@@ -19,9 +19,9 @@ namespace DataTemplatesApp.Model
 
                 _vehicles = new List<Vehicle>();
 
-                Vehicle v1 = new Vehicle("4545FRT", "Seat", "Leon");
-                Vehicle v2 = new Vehicle("6322KKK", "Papamobil", "FI");
-                Vehicle v3 = new Vehicle("8888NNN", "Audi", "A8");
+                Vehicle v1 = new Vehicle("4545FRT", "http://www.brandemia.org/wp-content/uploads/2012/10/logo_principal_seat.jpg", "Leon");
+                Vehicle v2 = new Vehicle("6322KKK", "https://mpng.subpng.com/20180403/jjw/kisspng-car-volkswagen-group-mercedes-benz-nissan-ico-5ac3d9760c3471.87627301152278463005.jpg", "FI");
+                Vehicle v3 = new Vehicle("8888NNN", "https://1000marcas.net/wp-content/uploads/2019/12/Audi-Logo-800x450.png", "A8");
                 //--------------------------------------------
                 _vehicles.Add(v1);
                 _vehicles.Add(v2);
@@ -105,7 +105,7 @@ namespace DataTemplatesApp.Model
 
 
 
-        public string Marca { get => marca.ToUpper(); set => marca = value; }
+        public string Marca { get => marca; set => marca = value; }
         public string Model { get => model; set => model = value; }
         public string Matricula { get => matricula;
             set {

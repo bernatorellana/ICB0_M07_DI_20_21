@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataTemplatesApp.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace DataTemplatesApp
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
         }
     }
 }

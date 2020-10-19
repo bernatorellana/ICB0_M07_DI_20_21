@@ -6,9 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <DataTemplate x:Key="ListViewItemTemplate1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Marca}" Grid.Column="0" Stretch="UniformToFill"></Image>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <TextBlock Text="{Binding Matricula}" FontWeight="Bold"></TextBlock>
+                    <TextBlock Text="{Binding Model}"></TextBlock>
+                    
+                </StackPanel>
+                <ListBox Grid.Column="2" ItemsSource="{Binding Usuaris}" DisplayMemberPath="Nom">
+                    
+                </ListBox>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
+        <ListView ItemTemplate="{StaticResource ListViewItemTemplate1}" x:Name="lsvVehicles" HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                 ></ListView>
 
     </Grid>
 </Page>
