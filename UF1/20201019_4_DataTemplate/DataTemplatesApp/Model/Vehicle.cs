@@ -27,6 +27,7 @@ namespace DataTemplatesApp.Model
                 _vehicles.Add(v1);
                 _vehicles.Add(v2);
                 _vehicles.Add(v3);
+                _vehicles.Add(v4);
                 //--------------------------------------------
 
                 //---------------------------------------------

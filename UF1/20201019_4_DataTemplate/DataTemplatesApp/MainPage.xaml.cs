@@ -30,8 +30,41 @@ namespace DataTemplatesApp
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
+            cboMarques.ItemsSource = Marca.GetLlistaMarques();
             lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
 
+        }
+
+        private void cboMarques_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Marca m = (Marca) cboMarques.SelectedValue;
+            if (m == null)
+            {
+                lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
+            }
+            else
+            {
+                List<Vehicle> vehiclesFiltrats = new List<Vehicle>();
+                foreach (Vehicle v in Vehicle.GetLlistatVehicles())
+                {
+                    if (v.MarcaP.Id == m.Id)
+                    {
+                        vehiclesFiltrats.Add(v);
+                    }
+                }
+                lsvVehicles.ItemsSource = vehiclesFiltrats;
+            }
+        }
+
+        private void Button_ContextCanceled(UIElement sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            cboMarques.SelectedValue = null;
         }
     }
 }

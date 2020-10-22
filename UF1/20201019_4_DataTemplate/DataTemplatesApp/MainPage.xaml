@@ -90,7 +90,33 @@
     </Page.Resources>
 
     <Grid>
-        <ListView x:Name="lsvVehicles" HorizontalAlignment="Stretch"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- combo box "fàcil"-->
+        <!--<ComboBox Grid.Row="0" x:Name="cboMarques"
+                  DisplayMemberPath="Nom"></ComboBox>-->
+        
+        <!-- Segon sistema:usem un ItemTemplate-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <ComboBox  x:Name="cboMarques" SelectionChanged="cboMarques_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Url}" Height="20" Width="20" Margin="0 0 10 0"></Image>
+                        <TextBlock Text="{Binding Nom}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+            <Button Content="△" FontFamily="Segoe UI Emoji" Click="Button_Click"></Button>
+        </StackPanel>
+
+        <ListView x:Name="lsvVehicles" 
+                  Grid.Row="1"
+                  HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                  >
 
