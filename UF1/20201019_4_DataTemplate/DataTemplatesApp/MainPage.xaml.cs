@@ -31,6 +31,7 @@ namespace DataTemplatesApp
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
+
         }
     }
 }

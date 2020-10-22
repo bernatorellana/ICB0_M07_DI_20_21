@@ -95,7 +95,7 @@
                  >
 
             <ListView.ItemTemplate>
-                        <DataTemplate x:Key="ListViewItemTemplate1">
+                        <DataTemplate>
             <Border Padding="10" BorderBrush="Gray" BorderThickness="1">
             <Grid HorizontalAlignment="Stretch"  Height="100">
                 <Grid.ColumnDefinitions>
@@ -103,13 +103,14 @@
                     <ColumnDefinition Width="25*"></ColumnDefinition>
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Image Source="{Binding Marca}" Grid.Column="0" 
+                <Image Source="{Binding MarcaP.Url}" Grid.Column="0" 
                        Stretch="Uniform"></Image>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                                 <TextBlock Text="{Binding Matricula}" FontWeight="Bold"  ></TextBlock>
                                 <TextBlock Text="{Binding Model}"   ></TextBlock>
-                    
-                </StackPanel>
+                                <TextBlock Text="{Binding MarcaP.Nom}"   ></TextBlock>
+
+                            </StackPanel>
                 <ListView Grid.Column="2" ItemsSource="{Binding Usuaris}"  Style="{StaticResource FixedHeaderListViewStyle}"
                          >
 

@@ -19,9 +19,10 @@ namespace DataTemplatesApp.Model
 
                 _vehicles = new List<Vehicle>();
 
-                Vehicle v1 = new Vehicle("4545FRT", "http://www.brandemia.org/wp-content/uploads/2012/10/logo_principal_seat.jpg", "Leon");
-                Vehicle v2 = new Vehicle("6322KKK", "https://mpng.subpng.com/20180403/jjw/kisspng-car-volkswagen-group-mercedes-benz-nissan-ico-5ac3d9760c3471.87627301152278463005.jpg", "FI");
-                Vehicle v3 = new Vehicle("8888NNN", "https://1000marcas.net/wp-content/uploads/2019/12/Audi-Logo-800x450.png", "A8");
+                Vehicle v1 = new Vehicle("4545FRT", Marca.GetMarcaPerId(1), "Leon");
+                Vehicle v2 = new Vehicle("6322KKK", Marca.GetMarcaPerId(2), "FI");
+                Vehicle v3 = new Vehicle("8888NNN", Marca.GetMarcaPerId(3), "A8");
+                Vehicle v4 = new Vehicle("6666NNN", Marca.GetMarcaPerId(3), "A5");
                 //--------------------------------------------
                 _vehicles.Add(v1);
                 _vehicles.Add(v2);
@@ -47,17 +48,17 @@ namespace DataTemplatesApp.Model
 
         public const int MAX_USUARIS = 3;
 
-        private string marca;
+        private Marca marca;
         private string model;
         private string matricula;
         private ObservableCollection<Usuari> usuaris;
         private int tipusAsseguranca;
         private List<string> extres;
 
-        public Vehicle(string matricula, string marca, string model)
+        public Vehicle(string matricula, Marca marca, string model)
         {
             Matricula = matricula;
-            Marca = marca;
+            MarcaP = marca;
             Model = model;
             //-------------
             // inicialitzem la llista
@@ -105,7 +106,7 @@ namespace DataTemplatesApp.Model
 
 
 
-        public string Marca { get => marca; set => marca = value; }
+        public Marca MarcaP { get => marca; set => marca = value; }
         public string Model { get => model; set => model = value; }
         public string Matricula { get => matricula;
             set {
@@ -117,7 +118,7 @@ namespace DataTemplatesApp.Model
         {
             get
             {
-                return Matricula + ">" + Marca + " " + Model;
+                return Matricula + ">" + MarcaP.Nom + " " + Model;
             }
         }
 
@@ -144,7 +145,7 @@ namespace DataTemplatesApp.Model
 
         public override string ToString()
         {
-            return Matricula + ">" + Marca + " " + Model;
+            return NomComplet;
         }
 
         public static bool validaMatricula(string text)
