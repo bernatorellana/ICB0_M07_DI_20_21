@@ -93,6 +93,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -119,11 +120,18 @@
             <TextBlock Width="200" Text="Filtrat per matricula" VerticalAlignment="Center" ></TextBlock>
             <TextBox x:Name="txtMatricula" TextChanged="txtMatricula_TextChanged" Width="150" Margin="15 0 0 0"></TextBox>
         </StackPanel>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Padding="5" >
+            <TextBlock Width="200" Text="Filtrat per tipus" VerticalAlignment="Center" ></TextBlock>
+            <RadioButton  Content="Qualsevol"     GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton  Content="Cotxe"     GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton  Content="Moto"      GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton  Content="Furgoneta"     GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton  Content="Camio" GroupName="rdoTipusVehicle"></RadioButton>
+        </StackPanel>
 
 
         <ListView x:Name="lsvVehicles" 
-                  Grid.Row="2"
+                  Grid.Row="3"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                  >

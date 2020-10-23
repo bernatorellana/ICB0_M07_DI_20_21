@@ -19,10 +19,10 @@ namespace DataTemplatesApp.Model
 
                 _vehicles = new List<Vehicle>();
 
-                Vehicle v1 = new Vehicle("4545FRT", Marca.GetMarcaPerId(1), "Leon");
-                Vehicle v2 = new Vehicle("6322KKK", Marca.GetMarcaPerId(2), "FI");
-                Vehicle v3 = new Vehicle("8888NNN", Marca.GetMarcaPerId(3), "A8");
-                Vehicle v4 = new Vehicle("6666NNN", Marca.GetMarcaPerId(3), "A5");
+                Vehicle v1 = new Vehicle("4545FRT", Marca.GetMarcaPerId(1), "Leon", TipusVehicle.COTXE);
+                Vehicle v2 = new Vehicle("6322KKK", Marca.GetMarcaPerId(2), "FI", TipusVehicle.COTXE);
+                Vehicle v3 = new Vehicle("8888NNN", Marca.GetMarcaPerId(3), "A8", TipusVehicle.COTXE);
+                Vehicle v4 = new Vehicle("6666NNN", Marca.GetMarcaPerId(3), "A5", TipusVehicle.FURGONETA);
                 //--------------------------------------------
                 _vehicles.Add(v1);
                 _vehicles.Add(v2);
@@ -53,10 +53,10 @@ namespace DataTemplatesApp.Model
         private string model;
         private string matricula;
         private ObservableCollection<Usuari> usuaris;
-        private int tipusAsseguranca;
+        private TipusVehicle tipusVehicle;
         private List<string> extres;
 
-        public Vehicle(string matricula, Marca marca, string model)
+        public Vehicle(string matricula, Marca marca, string model, TipusVehicle t)
         {
             Matricula = matricula;
             MarcaP = marca;
@@ -65,6 +65,9 @@ namespace DataTemplatesApp.Model
             // inicialitzem la llista
             usuaris = new ObservableCollection<Usuari>();
             extres = new List<string>();
+
+            TipusVehicle =  t;
+
         }
 
         public List<string> Extres { get => extres;  }
@@ -123,14 +126,9 @@ namespace DataTemplatesApp.Model
             }
         }
 
-        public int TipusAsseguranca { get => tipusAsseguranca;
-            set
-            {
-                if (value < 0 || value > 2) throw new Exception("Tipus assegurança invàlid");
-                tipusAsseguranca = value;
-            }
-        }
+  
 
+        public TipusVehicle TipusVehicle { get => tipusVehicle; set => tipusVehicle = value; }
 
         public override bool Equals(object obj)
         {
