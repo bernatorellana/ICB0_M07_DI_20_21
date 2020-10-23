@@ -92,6 +92,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -100,8 +101,9 @@
                   DisplayMemberPath="Nom"></ComboBox>-->
         
         <!-- Segon sistema:usem un ItemTemplate-->
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <ComboBox  x:Name="cboMarques" SelectionChanged="cboMarques_SelectionChanged">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Padding="5" >
+            <TextBlock Width="200" Text="Filtrat per marca" VerticalAlignment="Center"></TextBlock>
+            <ComboBox  x:Name="cboMarques" SelectionChanged="cboMarques_SelectionChanged" Margin="15 0 0 0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -110,12 +112,18 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
-            <Button Content="△" FontFamily="Segoe UI Emoji" Click="Button_Click"></Button>
+            </ComboBox>
+            <Button Content="" FontFamily="Segoe MDL2 Assets" Click="Button_Click" Margin="5 0 0 0"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Padding="5" >
+            <TextBlock Width="200" Text="Filtrat per matricula" VerticalAlignment="Center" ></TextBlock>
+            <TextBox x:Name="txtMatricula" TextChanged="txtMatricula_TextChanged" Width="150" Margin="15 0 0 0"></TextBox>
         </StackPanel>
 
+
+
         <ListView x:Name="lsvVehicles" 
-                  Grid.Row="1"
+                  Grid.Row="2"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                  >

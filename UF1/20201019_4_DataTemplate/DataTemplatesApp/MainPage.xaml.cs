@@ -38,25 +38,10 @@ namespace DataTemplatesApp
 
         private void cboMarques_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Marca m = (Marca) cboMarques.SelectedValue;
-            if (m == null)
-            {
-                lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
-            }
-            else
-            {
-                List<Vehicle> vehiclesFiltrats = new List<Vehicle>();
-                foreach (Vehicle v in Vehicle.GetLlistatVehicles())
-                {
-                    if (v.MarcaP.Id == m.Id)
-                    {
-                        vehiclesFiltrats.Add(v);
-                    }
-                }
-                lsvVehicles.ItemsSource = vehiclesFiltrats;
-            }
+            filtre();
         }
 
+    
         private void Button_ContextCanceled(UIElement sender, RoutedEventArgs args)
         {
 
@@ -66,5 +51,39 @@ namespace DataTemplatesApp
         {
             cboMarques.SelectedValue = null;
         }
+
+        private void txtMatricula_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            filtre();
+        }
+
+
+
+        /// <summary>
+        /// Funció de filtrat
+        /// </summary>
+        private void filtre()
+        {
+
+            List<Vehicle> vehiclesFiltrats = new List<Vehicle>();
+            Boolean criteriMarcaActiu = cboMarques.SelectedValue != null;
+            Marca marcaSeleccionada = (Marca)cboMarques.SelectedValue;
+            Boolean criteriMatriculaActiu = txtMatricula.Text.Trim().Length > 0;
+            foreach (Vehicle v in Vehicle.GetLlistatVehicles())
+            {
+
+                // si v compleix els criteris, l'afegim a la llista
+                if (
+                    (!criteriMarcaActiu || v.MarcaP.Equals(marcaSeleccionada)) &&
+                    (!criteriMatriculaActiu || v.Matricula.Contains(txtMatricula.Text))
+                )
+                {
+                    vehiclesFiltrats.Add(v);
+                }
+            }
+            lsvVehicles.ItemsSource = vehiclesFiltrats;
+                 
+        }
+
     }
 }

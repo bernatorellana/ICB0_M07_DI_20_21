@@ -31,7 +31,19 @@ namespace DataTemplatesApp.Model
             }
             return null;
         }
-        
+
+        public override bool Equals(object obj)
+        {
+            var marca = obj as Marca;
+            return marca != null &&
+                   Id == marca.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return 2108858624 + Id.GetHashCode();
+        }
+
 
         //-----------------------------------------------------
         private int id;
@@ -49,5 +61,7 @@ namespace DataTemplatesApp.Model
         public int Id { get => id; set => id = value; }
         public string Nom { get => nom; set => nom = value; }
         public string Url { get => url; set => url = value; }
+
+
     }
 }
