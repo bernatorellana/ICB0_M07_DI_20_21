@@ -122,11 +122,11 @@
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" Padding="5" >
             <TextBlock Width="200" Text="Filtrat per tipus" VerticalAlignment="Center" ></TextBlock>
-            <RadioButton  Content="Qualsevol"     GroupName="rdoTipusVehicle"></RadioButton>
-            <RadioButton  Content="Cotxe"     GroupName="rdoTipusVehicle"></RadioButton>
-            <RadioButton  Content="Moto"      GroupName="rdoTipusVehicle"></RadioButton>
-            <RadioButton  Content="Furgoneta"     GroupName="rdoTipusVehicle"></RadioButton>
-            <RadioButton  Content="Camio" GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton x:Name="rdoQualsevol" Checked="RadioButton_Checked"  Content="Qualsevol"       GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton x:Name="rdoCotxe" Checked="RadioButton_Checked"     Content="Cotxe"           GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton x:Name="rdoMoto" Checked="RadioButton_Checked"      Content="Moto"            GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton x:Name="rdoFurgo" Checked="RadioButton_Checked"     Content="Furgoneta"       GroupName="rdoTipusVehicle"></RadioButton>
+            <RadioButton x:Name="rdoCamio" Checked="RadioButton_Checked"     Content="Camio"           GroupName="rdoTipusVehicle"></RadioButton>
         </StackPanel>
 
 

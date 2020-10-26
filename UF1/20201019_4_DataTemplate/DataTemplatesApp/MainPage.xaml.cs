@@ -23,6 +23,9 @@ namespace DataTemplatesApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        private TipusVehicle? tipusVehicleSeleccionat;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -33,6 +36,17 @@ namespace DataTemplatesApp
 
             cboMarques.ItemsSource = Marca.GetLlistaMarques();
             lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
+
+            /// associar cada radiobutton amb el valor de 
+            /// tipus de vehicle pertinent
+            /// 
+            rdoQualsevol.Tag = null;
+            rdoCotxe.Tag = TipusVehicle.COTXE;
+            rdoMoto.Tag = TipusVehicle.MOTO;
+            rdoFurgo.Tag = TipusVehicle.FURGONETA;
+            rdoCamio.Tag = TipusVehicle.CAMIO;
+            // assegurem que el radioQualsevol està checked
+            rdoQualsevol.IsChecked = true;
 
         }
 
@@ -65,17 +79,21 @@ namespace DataTemplatesApp
         private void filtre()
         {
 
+   
+
             List<Vehicle> vehiclesFiltrats = new List<Vehicle>();
             Boolean criteriMarcaActiu = cboMarques.SelectedValue != null;
             Marca marcaSeleccionada = (Marca)cboMarques.SelectedValue;
             Boolean criteriMatriculaActiu = txtMatricula.Text.Trim().Length > 0;
+            Boolean criterTipusVehicleActiu = tipusVehicleSeleccionat != null;
             foreach (Vehicle v in Vehicle.GetLlistatVehicles())
             {
 
                 // si v compleix els criteris, l'afegim a la llista
                 if (
-                    (!criteriMarcaActiu || v.MarcaP.Equals(marcaSeleccionada)) &&
-                    (!criteriMatriculaActiu || v.Matricula.Contains(txtMatricula.Text))
+                    (!criteriMarcaActiu         || v.MarcaP.Equals(marcaSeleccionada)) &&
+                    (!criteriMatriculaActiu     || v.Matricula.Contains(txtMatricula.Text)) &&
+                    (!criterTipusVehicleActiu   || v.TipusVehicle == tipusVehicleSeleccionat )
                 )
                 {
                     vehiclesFiltrats.Add(v);
@@ -85,5 +103,18 @@ namespace DataTemplatesApp
                  
         }
 
+        private void RadioButton_Checked(object sender, 
+            RoutedEventArgs e)
+        {
+            RadioButton r = (RadioButton)sender;
+            if (r.Tag != null) {
+
+                tipusVehicleSeleccionat = (TipusVehicle) r.Tag;
+            } else
+            {
+                tipusVehicleSeleccionat = null;
+            }
+            filtre();
+        }
     }
 }
