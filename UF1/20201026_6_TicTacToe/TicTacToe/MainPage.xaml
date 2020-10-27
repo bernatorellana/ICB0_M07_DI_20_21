@@ -10,7 +10,7 @@
     Loaded="Page_Loaded">
 
     <Grid x:Name="grdTauler">
-      
+        <!--
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -28,6 +28,9 @@
         <Image HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"
                Grid.Column="2" Grid.Row="2" Source="Assets/FFFFFF-0.png" Stretch="Fill" Tapped="Image_Tapped"></Image>
-        
+        -->
+
+
+
     </Grid>
 </Page>
