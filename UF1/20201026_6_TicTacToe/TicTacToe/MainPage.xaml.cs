@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -31,13 +32,20 @@ namespace TicTacToe
        private  string[] URL_PLAYERS = { URL_P1, URL_P2 };
        private BitmapImage[] imatges; 
        private int playerActual = 0;
-
+       private BitmapImage bitmapBuit;
 
         private enum CASELLA
         {
             CBUIDA,
             CP1,
             CP2
+        }
+
+        private enum ESTAT_JOC
+        {
+            WIN,
+            TIE,
+            TO_BE_CONTINUED
         }
 
         private CASELLA[,] tauler;
@@ -48,11 +56,18 @@ namespace TicTacToe
             this.InitializeComponent();
         }
 
-        private int N = 5;
+        private int N = 2;
+        private int casellesPlenes = 0;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            tauler = new CASELLA[N,N];
+
+            casellesPlenes = 0;
+
+            bitmapBuit = new BitmapImage();
+            bitmapBuit.UriSource = new Uri(URL_EMPTY);
+
+            tauler = new CASELLA[N, N];
 
             // Precarreguem les imatges
             imatges = new BitmapImage[URL_PLAYERS.Length];
@@ -115,9 +130,7 @@ namespace TicTacToe
                     b.BorderBrush = new SolidColorBrush(Colors.Black);
 
                     Image im = new Image();
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.UriSource = new Uri(URL_EMPTY);
-                    im.Source = bitmap;
+                    im.Source = bitmapBuit;
 
                     im.Tapped += Im_Tapped;
 
@@ -131,20 +144,118 @@ namespace TicTacToe
 
                 }
             }
-
-
         }
 
-        private void Im_Tapped(object sender, TappedRoutedEventArgs e)
+        private  void Im_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Image i = (Image)sender;
             Coord c = (Coord) i.Tag;
             if( tauler[c.r, c.c] == CASELLA.CBUIDA )
             {
+                casellesPlenes++;
+
                 tauler[c.r, c.c] = playerActual==0?CASELLA.CP1:CASELLA.CP2;                
                 i.Source = imatges[playerActual]; //P1                
                 playerActual= (playerActual+1)%2;
+
+                // Mirem si hem guanyat
+                ESTAT_JOC estat = EsGuanyador(c.r, c.c);
+                if (estat == ESTAT_JOC.WIN)
+                {
+                    playerActual = (playerActual + 1) % 2; // los ganadores escriben la historia
+                    gameOverWin(tauler[c.r, c.c]);
+                } else if(estat == ESTAT_JOC.TIE)
+                {
+                    gameOverEmpat();
+                }
+
             }
         }
+        private void gameOverEmpat() {
+            gameOverAsync("Empat!", "Tots dos sou MOLT RUCS!");
+        }
+        private void gameOverWin(CASELLA c) {
+            gameOverAsync("Has guanyat!", "Felicitats player " + c.ToString());
+        }
+
+        private async System.Threading.Tasks.Task gameOverAsync(String titol, String missatge)
+        {
+            ContentDialog gameOverDialog = new ContentDialog
+            {
+                Title = titol,
+                Content = missatge,
+                CloseButtonText = "Close this shit",
+                PrimaryButtonText = "Play again"
+            };
+
+            ContentDialogResult result = await gameOverDialog.ShowAsync();
+            if(result==ContentDialogResult.Primary)
+            {
+                reiniciarJoc();
+            } else
+            {
+                CoreApplication.Exit(); //
+            }
+        }
+
+        private void reiniciarJoc()
+        {
+            tauler = new CASELLA[N, N];
+
+            foreach (Border b in grdTauler.Children)
+            {
+                ((Image)b.Child).Source = bitmapBuit;
+            }
+        }
+
+        int INLINE = 3;
+
+        private ESTAT_JOC EsGuanyador( int r, int c)
+        {   //  0 1 2 3 4
+            //  X X x X O
+            //  O O x O O
+            //  O O O O O
+            //  O O O O O
+            //  O O O O O
+
+
+            CASELLA player = tauler[r, c];
+
+                                  //r  c      r  c     r   c     r   c
+            int[,] direccions = { { 0, 1 }, { 1, 0 }, { 1, 1 }, { 1, -1 } };
+            //  0 1
+            //  1 0
+            //  1 1
+            //  1 -1 
+
+            for (int d = 0; d < direccions.GetLength(0); d++)
+            {
+                int seguidesPositiu = scanner(r, c, player, direccions[d, 0], direccions[d, 1]);
+                int seguidesNegatiu = scanner(r, c, player, -direccions[d, 0], -direccions[d, 1]);
+                if(seguidesPositiu + seguidesNegatiu-1==INLINE) return ESTAT_JOC.WIN;
+            }
+            if(casellesPlenes==N*N)
+            {
+                //empat
+                return ESTAT_JOC.TIE;
+            }
+            return ESTAT_JOC.TO_BE_CONTINUED;            
+        }
+
+        int scanner(int r, int c, CASELLA player , int dr, int dc)
+        {
+            int seguides = 0;
+            
+            while (c >= 0 && r >= 0 && c < N && r < N && tauler[r, c] == player)
+            {
+                r += dr;
+                c += dc;
+                seguides++;
+            }
+            return seguides;
+        }
+
+
+
     }
 }
