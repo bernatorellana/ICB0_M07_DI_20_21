@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="AppNavigationView.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:local="using:AppNavigationView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    >
+
+    <Grid>
+        
+        <!--Referència de les fons iconiques segoe MDL2
+        http://modernicons.io/segoe-mdl2/cheatsheet/
+        
+        -->
+        
+        
+        <muxc:NavigationView x:Name="nvwBarraNavegacio"
+                              PaneDisplayMode="Auto"
+                             ItemInvoked="nvwBarraNavegacio_ItemInvoked"
+                             Header="Títol pàgina">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Tag="home" Icon="Home" Content="Home"/>
+                <muxc:NavigationViewItemSeparator></muxc:NavigationViewItemSeparator>
+                <muxc:NavigationViewItemHeader Content="Gestió de vehicles"></muxc:NavigationViewItemHeader>
+
+                <muxc:NavigationViewItem Tag="list"  Content="Llista de Vehícles">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7AD;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Tag="edit"  Content="Edició de Vehícles">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItemSeparator></muxc:NavigationViewItemSeparator>
+
+            </muxc:NavigationView.MenuItems>
+
+
+            <Frame x:Name="frmPrincipal"></Frame>
+            
+        </muxc:NavigationView>
+    </Grid>
+</Page>
