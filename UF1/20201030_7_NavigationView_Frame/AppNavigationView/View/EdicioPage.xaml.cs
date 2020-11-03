@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppNavigationView.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,42 @@ namespace AppNavigationView.View
     /// </summary>
     public sealed partial class EdicioPage : Page
     {
+        private EdicioPageParams parametres;
+
+        public class EdicioPageParams
+        {
+            public MainPage paginaPrincipal;
+            public Vehicle  vehicleAEditar;
+
+            public EdicioPageParams(MainPage paginaPrincipal, Vehicle vehicleAEditar)
+            {
+                this.paginaPrincipal = paginaPrincipal;
+                this.vehicleAEditar = vehicleAEditar;
+            }
+        }
+
         public EdicioPage()
         {
             this.InitializeComponent();
+        }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            parametres = (EdicioPageParams)e.Parameter;
+            /*if(parametres.vehicleAEditar==null)
+            {
+                parametres.vehicleAEditar = new Vehicle();
+            }*/
+            if (parametres.vehicleAEditar != null)
+            {
+                mostrarVehicle(parametres.vehicleAEditar);
+            }
+        }
+
+        private void mostrarVehicle(Vehicle vehicleAEditar)
+        {
+            txtMatricula.Text = vehicleAEditar.Matricula;
         }
     }
 }

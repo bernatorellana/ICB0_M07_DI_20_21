@@ -14,6 +14,6 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Edició de vehicles" Grid.Row="0"></TextBlock>
-        <ListView x:Name="lsvVehicles"  Grid.Row="1"></ListView>
+        <TextBox x:Name="txtMatricula"></TextBox>
     </Grid>
 </Page>

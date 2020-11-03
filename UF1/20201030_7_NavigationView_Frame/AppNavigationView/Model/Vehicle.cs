@@ -70,6 +70,17 @@ namespace AppNavigationView.Model
 
         }
 
+        public Vehicle()
+        {
+            marca=null;
+            model="";
+            matricula="";
+            usuaris = new ObservableCollection<Usuari>();
+            extres = new List<string>();
+            tipusVehicle = TipusVehicle.COTXE;
+ 
+       }
+
         public List<string> Extres { get => extres;  }
 
         public bool afegirExtra(String codi)

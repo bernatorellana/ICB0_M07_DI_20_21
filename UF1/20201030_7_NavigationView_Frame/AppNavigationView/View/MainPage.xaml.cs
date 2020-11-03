@@ -1,4 +1,5 @@
-﻿using AppNavigationView.View;
+﻿using AppNavigationView.Model;
+using AppNavigationView.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,19 +31,35 @@ namespace AppNavigationView
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            frmPrincipal.Navigate(typeof(LlistatPage));
+            frmPrincipal.Navigate(typeof(LlistatPage), this);
         }
 
-        private void nvwBarraNavegacio_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
+        private void nvwBarraNavegacio_ItemInvoked(
+            Microsoft.UI.Xaml.Controls.NavigationView sender, 
+            Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
             Type t = typeof(LlistatPage);
+            object elParametre = null;
             switch (args.InvokedItemContainer.Tag.ToString())
             {
                 //case "home": t = typeof(LlistatPage); break;
-                case "edit": t = typeof(EdicioPage); break;
-                case "list": t = typeof(LlistatPage); break;
+                case "edit":
+                    t = typeof(EdicioPage);
+                    elParametre = new EdicioPage.EdicioPageParams(this, null);
+                    break;
+                case "list":
+                    t = typeof(LlistatPage);
+                    elParametre = this;
+                    break;
             }
-            frmPrincipal.Navigate(t);
+            frmPrincipal.Navigate(t, elParametre);
+        }
+
+        internal void mostraEdicioVehicle(Vehicle selectedItem)
+        {
+            frmPrincipal.Navigate(
+                typeof(EdicioPage), 
+                new EdicioPage.EdicioPageParams(this, selectedItem));
         }
     }
 }

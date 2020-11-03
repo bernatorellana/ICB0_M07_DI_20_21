@@ -9,12 +9,32 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Llista de vehicles" Grid.Row="0"></TextBlock>
-        <GridView x:Name="lsvVehicles"  Grid.Row="1"></GridView>
+        <GridView x:Name="lsvVehicles"  
+                  IsDoubleTapEnabled="True" 
+                  DoubleTapped="lsvVehicles_DoubleTapped"
+                  Grid.Row="1">
+            <GridView.ItemTemplate>
+            <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding MarcaP.Url}" Grid.Column="0"></Image>
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <TextBlock Text="{Binding Matricula}"></TextBlock>
+                            <TextBlock Text="{Binding Model}"></TextBlock>
+                            <TextBlock Text="{Binding MarcaP.Nom}"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+            </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>

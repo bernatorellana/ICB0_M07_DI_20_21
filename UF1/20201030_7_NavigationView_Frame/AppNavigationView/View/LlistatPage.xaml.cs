@@ -23,6 +23,8 @@ namespace AppNavigationView.View
     /// </summary>
     public sealed partial class LlistatPage : Page
     {
+        private MainPage paginaPrincipal;
+
         public LlistatPage()
         {
             this.InitializeComponent();
@@ -31,6 +33,19 @@ namespace AppNavigationView.View
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
+        }
+
+        private void lsvVehicles_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            if (lsvVehicles.SelectedItem != null)
+            {
+                paginaPrincipal.mostraEdicioVehicle((Vehicle) lsvVehicles.SelectedItem);
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            paginaPrincipal = (MainPage) e.Parameter;
         }
     }
 }
