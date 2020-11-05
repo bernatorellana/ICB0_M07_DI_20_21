@@ -61,5 +61,11 @@ namespace AppNavigationView
                 typeof(EdicioPage), 
                 new EdicioPage.EdicioPageParams(this, selectedItem));
         }
+
+        internal void AnarALListatVehicles()
+        {
+            frmPrincipal.Navigate(
+                typeof(LlistatPage),  this );
+        }
     }
 }

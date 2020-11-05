@@ -54,11 +54,56 @@ namespace AppNavigationView.View
             {
                 mostrarVehicle(parametres.vehicleAEditar);
             }
+            btnDelete.Visibility = (parametres.vehicleAEditar == null) ? 
+                Visibility.Collapsed : Visibility.Visible;
         }
 
         private void mostrarVehicle(Vehicle vehicleAEditar)
         {
             txtMatricula.Text = vehicleAEditar.Matricula;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            string errors = "";
+            bool dadesValides = validacions(out errors);
+            if(dadesValides)
+            {
+                if(parametres.vehicleAEditar==null)
+                {
+                    parametres.vehicleAEditar = new Vehicle();
+                    Vehicle.GetLlistatVehicles().Add(parametres.vehicleAEditar);
+                }
+                parametres.vehicleAEditar.Matricula = txtMatricula.Text;                
+            }
+            txbError.Text = errors;
+        }
+
+        private bool validacions(out string error)
+        {
+            error = "";
+            if (!Vehicle.validaMatricula(txtMatricula.Text))
+            {
+                error = "Matricula incorrecta";
+                return false;
+            }
+            return true;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            txbError.Text = "";
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            mostrarVehicle(parametres.vehicleAEditar);
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle.GetLlistatVehicles().Remove(parametres.vehicleAEditar);
+            parametres.paginaPrincipal.AnarALListatVehicles();
         }
     }
 }
