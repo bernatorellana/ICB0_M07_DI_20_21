@@ -8,12 +8,24 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid ColumnSpacing="10" RowSpacing="10" Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Edició de vehicles" Grid.Row="0"></TextBlock>
-        <TextBox x:Name="txtMatricula"></TextBox>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Edició de vehicles"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Grid.Row="0" Grid.ColumnSpan="2"></TextBlock>
+        <TextBlock Text="Matricula:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtMatricula" Grid.Row="1" Grid.Column="1"></TextBox>
+        <Button x:Name="btnCancel" Content="Cancel" Grid.Row="2" Grid.Column="0"></Button>
+        <Button x:Name="btnSave" Content="Save" Grid.Row="2" Grid.Column="1"></Button>
+        
     </Grid>
 </Page>
