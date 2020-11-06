@@ -48,12 +48,14 @@ namespace DemoControlsPersonalitzats.View
             if(validaDades())
             {
                 this.vehicle.Matricula = txbMatricula.Text;
+                this.vehicle.Model = txbModel.Text;
+                this.vehicle.MarcaP =  (Marca)cboMarques.SelectedValue;
             }
         }
 
         private bool validaDades()
         {
-            return true;
+            return Vehicle.validaMatricula(txbMatricula.Text);               
         }
     }
 }

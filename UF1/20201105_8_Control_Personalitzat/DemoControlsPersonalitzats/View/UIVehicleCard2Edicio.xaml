@@ -28,7 +28,7 @@
             <StackPanel Grid.Column="1" Orientation="Vertical" Padding="10">
                 <TextBox x:Name="txbMatricula" FontWeight="Bold" 
                          Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Matricula, Mode=OneWay}"></TextBox>
-                <TextBox Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Model, Mode=OneWay}"></TextBox>
+                <TextBox x:Name="txbModel" Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Model, Mode=OneWay}"></TextBox>
                 <ComboBox x:Name="cboMarques"
                           SelectedValue="{Binding ElementName=ucCardVehicle, Path=vehicle.MarcaP, Mode=OneWay}">
                     <ComboBox.ItemTemplate>

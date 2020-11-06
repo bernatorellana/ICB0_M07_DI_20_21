@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="DemoControlsPersonalitzats.View.NavegacioVehicles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DemoControlsPersonalitzats.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <local:UIVehicleCard2Edicio Grid.Row="0" Grid.ColumnSpan="5"></local:UIVehicleCard2Edicio>
+        <Button Grid.Row="1" Content="&#xE892;" Grid.Column="0" FontFamily="Segoe MDL2 Assets"></Button>
+        <Button Grid.Row="1" Content="&#xE76B;" Grid.Column="1" FontFamily="Segoe MDL2 Assets"></Button>
+        <Button Grid.Row="1" Content="&#xE76C;" Grid.Column="3" FontFamily="Segoe MDL2 Assets"></Button>
+        <Button Grid.Row="1" Content="&#xE893;" Grid.Column="4" FontFamily="Segoe MDL2 Assets"></Button>
+        
+    </Grid>
+</UserControl>
