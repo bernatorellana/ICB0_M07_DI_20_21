@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace DemoControlsPersonalitzats.Model
 {
-    public class Vehicle
+    public class Vehicle : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged; //INotifyPropertyChanged
+
+
         private static List<Vehicle> _vehicles; // SINGLETON
 
         public static List<Vehicle> GetLlistatVehicles()
@@ -55,6 +59,7 @@ namespace DemoControlsPersonalitzats.Model
         private ObservableCollection<Usuari> usuaris;
         private TipusVehicle tipusVehicle;
         private List<string> extres;
+
 
         public Vehicle(string matricula, Marca marca, string model, TipusVehicle t)
         {
@@ -122,11 +127,19 @@ namespace DemoControlsPersonalitzats.Model
 
 
         public Marca MarcaP { get => marca; set => marca = value; }
-        public string Model { get => model; set => model = value; }
+        public string Model { get => model; set
+            {
+                model = value;
+                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Model"));
+            }
+        }
         public string Matricula { get => matricula;
             set {
                 if (!validaMatricula(value)) throw new Exception("Matrícula no vàlida.");
-                matricula = value; }
+                matricula = value;
+                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Matricula"));
+
+            }
         }
 
         public string NomComplet

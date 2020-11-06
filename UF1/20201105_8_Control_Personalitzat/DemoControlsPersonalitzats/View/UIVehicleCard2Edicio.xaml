@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="DemoControlsPersonalitzats.View.UIVehicleCard2"
+    x:Class="DemoControlsPersonalitzats.View.UIVehicleCard2Edicio"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DemoControlsPersonalitzats.View"
@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
+    Loaded="ucCardVehicle_Loaded"
     x:Name="ucCardVehicle">
     <Border BorderBrush="Black" BorderThickness="1" 
             CornerRadius="10">
@@ -22,11 +23,25 @@
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
             <Image Source="{Binding ElementName=ucCardVehicle, Path=vehicle.MarcaP.Url}" Grid.Column="0"></Image>
             <StackPanel Grid.Column="1" Orientation="Vertical" Padding="10">
-                <TextBlock x:Name="txbMatricula" FontWeight="Bold" Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Matricula, Mode=OneWay}"></TextBlock>
-                <TextBlock Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Model, Mode=OneWay}"></TextBlock>
-                <TextBlock Text="{Binding ElementName=ucCardVehicle, Path=vehicle.MarcaP.Nom, Mode=OneWay}"></TextBlock>
+                <TextBox x:Name="txbMatricula" FontWeight="Bold" 
+                         Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Matricula, Mode=OneWay}"></TextBox>
+                <TextBox Text="{Binding ElementName=ucCardVehicle, Path=vehicle.Model, Mode=OneWay}"></TextBox>
+                <ComboBox x:Name="cboMarques"
+                          SelectedValue="{Binding ElementName=ucCardVehicle, Path=vehicle.MarcaP, Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="20" Height="20" Source="{Binding Url}"></Image>
+                                <TextBlock Text="{Binding Nom}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Save" Click="Button_Click"></Button>
+
             </StackPanel>
         </Grid>
     </Border>

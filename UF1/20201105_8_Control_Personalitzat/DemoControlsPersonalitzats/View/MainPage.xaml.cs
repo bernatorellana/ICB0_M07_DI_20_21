@@ -30,7 +30,17 @@ namespace DemoControlsPersonalitzats
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            uiCard.vehicle = Vehicle.GetLlistatVehicles()[0];
+            //uiCard.vehicle = Vehicle.GetLlistatVehicles()[0];
+
+            lsvVehicles.ItemsSource = Vehicle.GetLlistatVehicles();
+
+
+
         }
+        /*
+        private void lsvVehicles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            uiCard.vehicle = (Vehicle) lsvVehicles.SelectedValue;
+        }*/
     }
 }

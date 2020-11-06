@@ -10,13 +10,38 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
 
-    <StackPanel Orientation="Vertical">
-        <view:UICardVehicle  Width="300" Height="100" 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lsvVehicles"  Grid.Column="0"  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <view:UIVehicleCard2 vehicle="{Binding}"></view:UIVehicleCard2>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch"></Setter>
+                </Style>
+                </ListView.ItemContainerStyle>
+        </ListView>
+        <view:UIVehicleCard2Edicio Grid.Column="1"
+                             vehicle="{Binding ElementName=lsvVehicles, Path=SelectedValue}"
+            HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             x:Name="uiCard">
+            </view:UIVehicleCard2Edicio>
+
+            <!--view:UICardVehicle  Width="300" Height="100" 
                              Matricula="1234TTT"
                              Marca="Seat"
-                             Model="Leon"></view:UICardVehicle>
-        <view:UIVehicleCard2 Width="300" Height="100"  x:Name="uiCard">
-            
-        </view:UIVehicleCard2>
-    </StackPanel>
+                             Model="Leon"></>
+        <view:UIVehicleCard2 Width="300" Height="100"  x:Name="uiCard">            
+        </view:UIVehicleCard2-->
+        
+        
+    </Grid>
 </Page>
