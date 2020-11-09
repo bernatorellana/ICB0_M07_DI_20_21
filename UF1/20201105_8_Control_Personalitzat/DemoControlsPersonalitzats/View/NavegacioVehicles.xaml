@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    >
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,11 +23,12 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <local:UIVehicleCard2Edicio Grid.Row="0" Grid.ColumnSpan="5"></local:UIVehicleCard2Edicio>
-        <Button Grid.Row="1" Content="&#xE892;" Grid.Column="0" FontFamily="Segoe MDL2 Assets"></Button>
-        <Button Grid.Row="1" Content="&#xE76B;" Grid.Column="1" FontFamily="Segoe MDL2 Assets"></Button>
-        <Button Grid.Row="1" Content="&#xE76C;" Grid.Column="3" FontFamily="Segoe MDL2 Assets"></Button>
-        <Button Grid.Row="1" Content="&#xE893;" Grid.Column="4" FontFamily="Segoe MDL2 Assets"></Button>
-        
+        <local:UIVehicleCard2Edicio x:Name="cardVehicle" Grid.Row="0" Grid.ColumnSpan="5"></local:UIVehicleCard2Edicio>
+        <Button x:Name="btnFirst" Click="btnFirst_Click" Grid.Row="1"  HorizontalAlignment="Center" Content="&#xE892;" Grid.Column="0" FontFamily="Segoe MDL2 Assets"></Button>
+        <Button x:Name="btnPrev"  Click="btnPrev_Click" Grid.Row="1" HorizontalAlignment="Center" Content="&#xE76B;" Grid.Column="1" FontFamily="Segoe MDL2 Assets"></Button>
+        <TextBox x:Name="txtNum"  Grid.Row="1" Grid.Column="2" IsReadOnly="True" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Button x:Name="btnNext"  Click="btnNext_Click" Grid.Row="1" HorizontalAlignment="Center" Content="&#xE76C;" Grid.Column="3" FontFamily="Segoe MDL2 Assets"></Button>
+        <Button x:Name="btnLast"  Click="btnLast_Click" Grid.Row="1" HorizontalAlignment="Center" Content="&#xE893;" Grid.Column="4" FontFamily="Segoe MDL2 Assets"></Button>
+
     </Grid>
 </UserControl>
