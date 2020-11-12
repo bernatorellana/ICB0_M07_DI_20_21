@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="ControlsTipusTest.View.UIExam"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControlsTipusTest.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Border BorderBrush="Black" Background="#FFF2ECD5" CornerRadius="20">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" >
+            <StackPanel Orientation="Vertical" Padding="20">
+                <TextBlock Text="1.- Text de la pregunta:" 
+                           Margin="0 0 0 10"
+                           FontWeight="ExtraBold"></TextBlock>
+                <RadioButton Content="Opció 1" Margin="5"   >
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="0.85" ScaleY="0.85"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="Opció 1" Margin="5" >
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="0.85" ScaleY="0.85"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="Opció 1" Margin="5"  >
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="0.85" ScaleY="0.85"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="Opció 1" Margin="5"  >
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="0.85" ScaleY="0.85"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <Button Grid.Row="1" Grid.Column="1" FontFamily="Segoe MDL2 Assets">&#59179;</Button>
+        <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" FontFamily="Segoe MDL2 Assets">&#xE72A;</Button>
+        
+        
+    </Grid>
+    </Border>
+</UserControl>
