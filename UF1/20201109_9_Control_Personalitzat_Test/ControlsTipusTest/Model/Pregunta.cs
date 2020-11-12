@@ -25,8 +25,8 @@ namespace ControlsTipusTest.Model
 
                 Pregunta p2 = new Pregunta("NH3 és?", 1, 1.0);
                 p2.addResposta("Aigua");
-                p2.addResposta("Amoniac");
                 p2.addResposta("Whisky");
+                p2.addResposta("Amoniac");                
                 p2.addResposta("Hidroalcoholic");
                 _preguntes.Add(p2);
 
@@ -48,6 +48,8 @@ namespace ControlsTipusTest.Model
         private String enunciat;
         private int indexRespostaCorrecta;
         private double valor;
+        private int indexRespostaSeleccionada;
+        private const int NO_SELECCIONAT = -1;
 
         public Pregunta(string enunciat, int indexRespostaCorrecta, double valor)
         {
@@ -55,6 +57,14 @@ namespace ControlsTipusTest.Model
             this.IndexRespostaCorrecta = indexRespostaCorrecta;
             this.Valor = valor;
             respostes = new List<String>();
+            IndexRespostaSeleccionada = NO_SELECCIONAT;
+        }
+
+        public double GetPuntuacio()
+        {
+            if (IndexRespostaSeleccionada == NO_SELECCIONAT) return 0;
+            if (IndexRespostaSeleccionada == indexRespostaCorrecta) return Valor;
+            else return - Valor / (double)(Respostes.Count);
         }
 
         public void addResposta(String r)
@@ -68,6 +78,7 @@ namespace ControlsTipusTest.Model
         public List<string> Respostes { get => respostes; set => respostes = value; }
         public int IndexRespostaCorrecta { get => indexRespostaCorrecta; set => indexRespostaCorrecta = value; }
         public double Valor { get => valor; set => valor = value; }
+        public int IndexRespostaSeleccionada { get => indexRespostaSeleccionada; set => indexRespostaSeleccionada = value; }
 
         #endregion
     }

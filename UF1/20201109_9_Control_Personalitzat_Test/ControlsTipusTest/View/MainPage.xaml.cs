@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlsTipusTest.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
 
-namespace ControlsTipusTest
+namespace ControlsTipusTest.View
 {
     /// <summary>
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
@@ -25,6 +26,11 @@ namespace ControlsTipusTest
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            uiexam.Preguntes = Pregunta.GetPreguntes();
         }
     }
 }
