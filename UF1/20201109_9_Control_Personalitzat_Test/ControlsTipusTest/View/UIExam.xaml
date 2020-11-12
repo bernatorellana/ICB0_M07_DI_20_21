@@ -6,8 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="350"
+    d:DesignWidth="250" 
+     MinWidth="250" MinHeight="350" >
     <Border BorderBrush="Black" Background="#FFF2ECD5" CornerRadius="20">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,6 +18,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -50,8 +52,7 @@
         </Border>
         <Button Grid.Row="1" Grid.Column="1" FontFamily="Segoe MDL2 Assets">&#59179;</Button>
         <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" FontFamily="Segoe MDL2 Assets">&#xE72A;</Button>
-        
-        
-    </Grid>
+        <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0 20 0 0">Finish</Button>
+        </Grid>
     </Border>
 </UserControl>
