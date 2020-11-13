@@ -115,8 +115,6 @@ namespace ControlsTipusTest.View
             {
                 // seleccionar radio button concret
                 radioButtonsRespostes[PreguntaActual.IndexRespostaSeleccionada].IsChecked = true;
-
-
             } else
             {
                 // no contestada
