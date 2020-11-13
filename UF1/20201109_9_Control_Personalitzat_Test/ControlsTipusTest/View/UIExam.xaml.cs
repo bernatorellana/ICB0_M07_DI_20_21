@@ -20,7 +20,7 @@ namespace ControlsTipusTest.View
 {
     public sealed partial class UIExam : UserControl
     {
-
+        public event EventHandler OnFinishedExamen;
 
         List<RadioButton> radioButtonsRespostes = new List<RadioButton>();
         private int indexPreguntaActual=0;
@@ -45,15 +45,15 @@ namespace ControlsTipusTest.View
 
 
 
-        public decimal Puntuacio
+        public double Puntuacio
         {
-            get { return (decimal)GetValue(PuntuacioProperty); }
+            get { return (double)GetValue(PuntuacioProperty); }
             set { SetValue(PuntuacioProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Puntuacio.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PuntuacioProperty =
-            DependencyProperty.Register("Puntuacio", typeof(decimal), typeof(UIExam), new PropertyMetadata(0));
+            DependencyProperty.Register("Puntuacio", typeof(double), typeof(UIExam), new PropertyMetadata(0));
 
 
 
@@ -138,10 +138,13 @@ namespace ControlsTipusTest.View
 
         private void DesseleccionarRadioButtons()
         {
+            PreguntaActual.IndexRespostaSeleccionada = -1;
+            
             foreach (RadioButton element in radioButtonsRespostes)
             {
                 element.IsChecked = false;                
             }
+            VerificaSiTotesLesPreguntesEstanRespostes();
         }
 
 
@@ -159,6 +162,7 @@ namespace ControlsTipusTest.View
                     r.Checked += R_Checked; 
                 }
             }
+            VerificaSiTotesLesPreguntesEstanRespostes();
         }
 
         private void R_Checked(object sender, RoutedEventArgs e)
@@ -166,6 +170,48 @@ namespace ControlsTipusTest.View
             RadioButton r = (RadioButton)sender;
             int indexSeleccionat = (int)r.Tag;
             PreguntaActual.IndexRespostaSeleccionada = indexSeleccionat;
+
+            VerificaSiTotesLesPreguntesEstanRespostes();
+        }
+
+        private void VerificaSiTotesLesPreguntesEstanRespostes()
+        {
+            Boolean totesLesRespostesContestades = true;
+            if (Preguntes == null)
+            {
+                totesLesRespostesContestades = false;
+            }
+            else
+            {
+
+                foreach (Pregunta p in Preguntes)
+                {
+                    if (p.IndexRespostaSeleccionada == -1)
+                    {
+                        totesLesRespostesContestades = false;
+                        break;
+                    }
+                }
+            }
+
+            HaFinalitzat = totesLesRespostesContestades;
+     
+            btnFinish.Visibility = totesLesRespostesContestades ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void btnFinish_Click(object sender, RoutedEventArgs e)
+        {
+            double puntuacio = 0;
+            foreach(Pregunta p in Preguntes)
+            {
+                puntuacio += p.GetPuntuacio();
+            }
+            Puntuacio = puntuacio;
+            this.IsEnabled = false;
+
+  
+            // Cridar l'esdeveniment
+            OnFinishedExamen?.Invoke(this, new EventArgs());          
         }
     }
 }

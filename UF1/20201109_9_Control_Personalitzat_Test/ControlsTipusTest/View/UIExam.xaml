@@ -56,7 +56,7 @@
             <Button Grid.Row="1" Grid.Column="1" Click="MoveClickPrev"  FontFamily="Segoe MDL2 Assets">&#59179;</Button>
             <Button Grid.Row="1" Grid.Column="2" Click="MoveClickNext" HorizontalAlignment="Right" FontFamily="Segoe MDL2 Assets">&#xE72A;</Button>
         <Button Grid.Row="2" x:Name="btnUnselect" Click="btnUnselect_Click" Grid.Column="1" HorizontalAlignment="Left" Margin="0 20 0 0">Unselect</Button>
-        <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0 20 0 0">Finish</Button>
+        <Button x:Name="btnFinish" Click="btnFinish_Click" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0 20 0 0">Finish</Button>
         </Grid>
     </Border>
 </UserControl>

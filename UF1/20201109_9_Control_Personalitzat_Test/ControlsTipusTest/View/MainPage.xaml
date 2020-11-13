@@ -10,7 +10,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
 
-    <Grid>
-        <view:UIExam x:Name="uiexam"></view:UIExam>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <view:UIExam x:Name="uiexam" OnFinishedExamen="uiexam_OnFinishedExamen"></view:UIExam>
+        <TextBox Text="{Binding ElementName=uiexam, Path=HaFinalitzat}"></TextBox>
+        <TextBox Text="{Binding ElementName=uiexam, Path=Puntuacio}"></TextBox>
+        <Image x:Name="imgFinal"></Image>
+    </StackPanel>
 </Page>
