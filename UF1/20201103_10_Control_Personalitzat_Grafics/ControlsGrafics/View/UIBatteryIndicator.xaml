@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="ControlsGrafics.View.UIBatteryIndicator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControlsGrafics.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Canvas Background="White">
+        <Rectangle x:Name="recPila" Canvas.Left="0" Canvas.Top="0" Width="104" Height="50" 
+                   Stroke="#FF100C0C" StrokeThickness="5">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF111111"/>
+                    <GradientStop Color="#FF00FF00" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+
+        </Rectangle>
+        <Rectangle Canvas.Left="100" Canvas.Top="12.5" Fill="Black" Height="25" Width="12"></Rectangle>
+
+        <StackPanel Canvas.Top="5" Canvas.Left="5" Orientation="Horizontal" x:Name="stkRalletes">
+            <!--<Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>
+            <Rectangle  Width="7" Height="38" Fill="Black" Margin="1"></Rectangle>-->
+        </StackPanel>
+
+        <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="40" Foreground="#FFC18585" FocusVisualPrimaryBrush="#FF600A0A">
+            <TextBlock.RenderTransform>
+                <CompositeTransform  Rotation="90" TranslateX="25" TranslateY="0" CenterX="20" CenterY="25"></CompositeTransform>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+    </Canvas>
+</UserControl>
