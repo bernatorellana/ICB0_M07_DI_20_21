@@ -6,10 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    >
 
-    <Canvas Background="White">
+    <Canvas Background="White" x:Name="cnvPila">
         <Rectangle x:Name="recPila" Canvas.Left="0" Canvas.Top="0" Width="104" Height="50" 
                    Stroke="#FF100C0C" StrokeThickness="5">
             <Rectangle.Fill>
@@ -40,5 +39,9 @@
                 <CompositeTransform  Rotation="90" TranslateX="25" TranslateY="0" CenterX="20" CenterY="25"></CompositeTransform>
             </TextBlock.RenderTransform>
         </TextBlock>
+
+        <!--.RenderTransform>
+            <CompositeTransform Rotation="-90" TranslateY="112"></CompositeTransform>
+        </-->
     </Canvas>
 </UserControl>

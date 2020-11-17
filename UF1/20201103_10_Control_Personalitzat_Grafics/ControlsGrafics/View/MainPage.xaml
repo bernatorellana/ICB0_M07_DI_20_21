@@ -9,7 +9,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <view:UIBatteryIndicator PercentatgeCarrega="80"></view:UIBatteryIndicator>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <view:UIBatteryIndicator x:Name="bateria"  PercentatgeCarrega="50" 
+                                 EsVertical="False"
+                                 ></view:UIBatteryIndicator>
+        <view:UIBatteryIndicator x:Name="bateria1"  PercentatgeCarrega="30" 
+                                 EsVertical="False"
+                                 ></view:UIBatteryIndicator>
+        <view:UIBatteryIndicator x:Name="bateria2"  PercentatgeCarrega="10" 
+                                 EsVertical="True"
+                                 ></view:UIBatteryIndicator>
+        <view:UIBatteryIndicator x:Name="bateria3"  PercentatgeCarrega="70" 
+                                 EsVertical="True"
+                                 ></view:UIBatteryIndicator>
+        <TextBox Text="{Binding ElementName=bateria, Path=PercentatgeCarrega, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+    </StackPanel>
 </Page>

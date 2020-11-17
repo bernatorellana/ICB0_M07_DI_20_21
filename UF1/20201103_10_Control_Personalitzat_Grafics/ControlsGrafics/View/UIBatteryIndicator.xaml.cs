@@ -45,11 +45,13 @@ namespace ControlsGrafics.View
             bat.PercentatgeChangedCallback(e);
         }
 
+
+        
         private  void PercentatgeChangedCallback(DependencyPropertyChangedEventArgs e)
         {
             if (PercentatgeCarrega > 100) PercentatgeCarrega = 100;
 
-            double hue =  360 * PercentatgeCarrega /100.0;
+            double hue =  120 * PercentatgeCarrega /100.0;
             Color c = Microsoft.Toolkit.Uwp.Helpers.ColorHelper.FromHsv(hue, 1, 1);
 
             LinearGradientBrush lgb = (LinearGradientBrush) recPila.Fill;
@@ -71,5 +73,64 @@ namespace ControlsGrafics.View
             }
 
         }
+
+
+
+
+
+
+        public bool EsVertical
+        {
+            get { return (bool)GetValue(EsVerticalProperty); }
+            set { SetValue(EsVerticalProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EsVertical.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EsVerticalProperty =
+            DependencyProperty.Register("EsVertical", typeof(bool), 
+                typeof(UIBatteryIndicator), new PropertyMetadata(false, EsVerticalChangedCallbackStatic));
+
+        private static void EsVerticalChangedCallbackStatic(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            UIBatteryIndicator b = (UIBatteryIndicator)d;
+            b.EsVerticalChangedCallback(e);
+        }
+        private void EsVerticalChangedCallback(
+            DependencyPropertyChangedEventArgs e)
+        {
+            CompositeTransform ct = new CompositeTransform();
+            if (EsVertical)
+            {
+                Width = 50;
+                Height = 112;
+                ct.Rotation = -90;
+                ct.TranslateY = 112;
+            } else
+            {
+                Height = 50;
+                Width= 112;
+            }
+            cnvPila.RenderTransform = ct; 
+        }
+        // cnvPila
+        //<!--.RenderTransform>
+        //    <CompositeTransform Rotation = "-90" TranslateY="112"></CompositeTransform>
+        //</-->
+
+            /*
+        public new int Height
+        {
+            get { return EsVertical ? 120 : 50; }
+            
+        }
+
+        public new int Width
+        {
+            get { return !EsVertical ? 120 : 50; }
+
+        }*/
+
+
+
     }
 }
