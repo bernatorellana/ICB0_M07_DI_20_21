@@ -62,33 +62,60 @@ namespace Grafics.View
             dibuixaGrafica();
         }
 
+
+        private const int NUMERO_DIVISIONS = 10;
+
+
+
         private void dibuixaGrafica()
         {
+
             /*
+           --* 
              * 
              * 
              * 
-             * 
+           --* 
              *  **
              *  **
              *  **
-             * **|*******************************************/
+           --* **|*******************************************/
               //DI
             Double max = Valors.Values.Max();
             Double min = 0;// Valors.Values.Min();
+            //--------------------------------------
 
             int midaColumna = (int)( Width / Valors.Count);
             int midaBarra = (int)( 0.75 * midaColumna);
-
             int Height2 = (int)(Height * 0.75);
 
+            SolidColorBrush colorLinia = new SolidColorBrush(Colors.Black);
             //------------------------------------------
+            double particio = (max - min) / NUMERO_DIVISIONS;
+            double pixels_particio = (Height2) /(double) NUMERO_DIVISIONS;
+
+            double y = Height2;
+            for(int i=0;i<= NUMERO_DIVISIONS;i++)
+            {
+                Line liniaDivisoria = new Line();
+                liniaDivisoria.Y1 = liniaDivisoria.Y2 = y;
+                liniaDivisoria.X1 = 0;
+                liniaDivisoria.X2 = 10;
+                liniaDivisoria.Stroke = colorLinia;
+                liniaDivisoria.StrokeThickness = 1;
+                cnvGrafica.Children.Add(liniaDivisoria);
+
+                y -= pixels_particio;
+
+            }
+
+
+            //--------------------------------------
             Line eixVertical = new Line();
             eixVertical.X1 = eixVertical.X2 =  0;
             eixVertical.Y1 = 0;
             eixVertical.Y2 = Height2;
 
-            SolidColorBrush colorLinia = new SolidColorBrush(Colors.Black);
             eixVertical.Stroke = colorLinia;
             eixVertical.StrokeThickness = 1;
             //------------------------------------
