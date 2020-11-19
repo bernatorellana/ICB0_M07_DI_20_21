@@ -13,6 +13,6 @@
     <Grid>
         <view:SuperChart x:Name="chart"
                          ColorBarra="GreenYellow"
-                         Width="200" Height="300" ></view:SuperChart>
+                         Width="800" Height="500" ></view:SuperChart>
     </Grid>
 </Page>

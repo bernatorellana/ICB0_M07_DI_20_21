@@ -94,6 +94,7 @@ namespace Grafics.View
             double particio = (max - min) / NUMERO_DIVISIONS;
             double pixels_particio = (Height2) /(double) NUMERO_DIVISIONS;
 
+            double valorLinia = min;
             double y = Height2;
             for(int i=0;i<= NUMERO_DIVISIONS;i++)
             {
@@ -105,6 +106,14 @@ namespace Grafics.View
                 liniaDivisoria.StrokeThickness = 1;
                 cnvGrafica.Children.Add(liniaDivisoria);
 
+                TextBlock tb = new TextBlock();
+                tb.Text = valorLinia + "";
+                tb.FontSize = 8;
+                Canvas.SetLeft(tb, 10);
+                Canvas.SetTop(tb, y-5);
+                cnvGrafica.Children.Add(tb);
+
+                valorLinia += particio;
                 y -= pixels_particio;
 
             }
@@ -130,10 +139,25 @@ namespace Grafics.View
             cnvGrafica.Children.Add(eixVertical);
             cnvGrafica.Children.Add(eixHoritzontal);
             //------------------------------------
-            SolidColorBrush colorBarra = 
-                new SolidColorBrush(ColorBarra);
-             
+            //SolidColorBrush colorBarra = 
+            //    new SolidColorBrush(ColorBarra);
+            LinearGradientBrush colorBarra = new LinearGradientBrush();
+            colorBarra.EndPoint = new Point(0.5, 1);
+            colorBarra.StartPoint = new Point(0.5, 0);
+            GradientStop gs1 = new GradientStop();
+            gs1.Color =  Color.FromArgb(255, 250, 2, 2);
+            GradientStop gs2 = new GradientStop();
+            gs2.Color = Colors.White;
+            gs2.Offset = 1;
+            colorBarra.GradientStops.Add(gs1);
+            colorBarra.GradientStops.Add(gs2);
 
+            /*
+            LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFF00202"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+            */
             int left = 0;
             foreach (String clau in Valors.Keys)
             {

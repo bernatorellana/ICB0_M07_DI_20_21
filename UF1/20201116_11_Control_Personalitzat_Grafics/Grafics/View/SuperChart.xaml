@@ -9,5 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Canvas x:Name="cnvGrafica"></Canvas>
+    <Canvas x:Name="cnvGrafica">
+   
+    </Canvas>
 </UserControl>
