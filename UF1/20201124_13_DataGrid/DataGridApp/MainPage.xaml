@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="DataGridApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DataGridApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    >
+
+    <Grid>
+        <controls:DataGrid 
+            x:Name="dtgHeroes"
+            AutoGenerateColumns="False">
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn
+                    Header="Nom"
+                    Binding="{Binding Name}"
+                    Width="SizeToCells"/>
+                <controls:DataGridTextColumn
+                    Header="Descripció"
+                    Binding="{Binding ShortDesc}"
+                    Width="300">
+                    <controls:DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </controls:DataGridTextColumn.ElementStyle>
+            
+                </controls:DataGridTextColumn>
+                <controls:DataGridCheckBoxColumn
+                    Header="Sexe"
+                    Binding="{Binding Sex}"
+                    >
+                    
+                </controls:DataGridCheckBoxColumn>
+                <controls:DataGridTemplateColumn
+                    Header="Team"                   
+                    >
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <ComboBox
+                             ItemsSource="{Binding Teams}"
+                                SelectedValue="{Binding Team}"
+                                DisplayMemberPath="Name">   
+                        </ComboBox>
+                    </DataTemplate>
+                  </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+                
+                
+            </controls:DataGrid.Columns>
+            
+            
+        </controls:DataGrid>
+    </Grid>
+</Page>
