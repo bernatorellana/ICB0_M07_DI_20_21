@@ -6,14 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:view="using:DataGridApp.View"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded"
     >
+    <Page.Resources>
+        <view:NegationConverter x:Key="NegationConverterKey" ></view:NegationConverter>
+    </Page.Resources>
 
     <Grid>
-        <controls:DataGrid 
-            x:Name="dtgHeroes"
+        <controls:DataGrid  
+            x:Name="dtgHeroes"     
+            IsReadOnly="true"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            SelectionMode="Extended"
+            GridLinesVisibility="All"
+            AlternatingRowBackground="LightGray"
+ 
             AutoGenerateColumns="False">
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn
@@ -50,10 +60,46 @@
                     </DataTemplate>
                   </controls:DataGridTemplateColumn.CellTemplate>
                 </controls:DataGridTemplateColumn>
-                
-                
+                <!-- *********************************** -->
+                <controls:DataGridTemplateColumn
+                    Header="Image"                   
+                    >
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <Image Width="40" Height="40" Stretch="Uniform" Source="{Binding UrlPhoto}"></Image>
+                            </Border>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+                <!-- *********************************** -->
+                <controls:DataGridTextColumn
+                    Header="Sexe"
+                    Binding="{Binding SexeS}"
+                    Width="SizeToCells"/>
+                <!-- ********* FUMADA COMING SOON ************************** -->
+                <controls:DataGridTemplateColumn
+                    Header="Sexe++"                   
+                    >
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton x:Name="rdoA" Content="Dona" IsChecked="{Binding Sex, Converter={StaticResource NegationConverterKey}}"/>
+                                <RadioButton x:Name="rdoB" Content="Home" IsChecked="{Binding Sex}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+
             </controls:DataGrid.Columns>
-            
+        <!-- Afegim un template de detall amb més informació -->
+            <controls:DataGrid.RowDetailsTemplate >
+                <DataTemplate>
+                    <ListView 
+                        ItemsSource="{Binding AlterEgos}" 
+                        ></ListView>
+                </DataTemplate>
+            </controls:DataGrid.RowDetailsTemplate>
             
         </controls:DataGrid>
     </Grid>

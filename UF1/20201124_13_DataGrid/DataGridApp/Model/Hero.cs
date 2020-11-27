@@ -52,7 +52,13 @@ namespace DataGridApp.Model
 
         }
 
-
+        public string SexeS
+        {
+            get
+            {
+                return sex ? "♂" : "♀";
+            }
+        }
 
         public string Name { get => name; set => name = value; }
         public string Desc { get => desc; set => desc = value; }
