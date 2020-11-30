@@ -28,7 +28,7 @@ namespace SakilaDB
         public DateTime Last_update { get => last_update; set => last_update = value; }
         #endregion
 
-        public static List<ActorDB> getActors(String nameFilter="")
+        public static List<ActorDB> getActors(String nameFilter, String surnameFilter, DateTime lastUpdate)
         {
             try
             {
@@ -38,15 +38,31 @@ namespace SakilaDB
                     {
                         connexio.Open();
 
-                        using (var consulta = connexio.CreateCommand())
+                        using (DbCommand consulta = connexio.CreateCommand())
                         {
                             // A) definir la consulta
-                            consulta.CommandText = "select * from actor";
+                            consulta.CommandText = $@"select * from actor 
+                                                    where
+                                                    (@nameFilter = '%%' or  first_name like @nameFilter ) and
+                                                    (@surnameFilter = '%%' or last_name like @surnameFilter) and
+                                                    last_update > @lastUpdate
+                                                    ";
+                            //                                                                      posem el % per tal que el like funcioni !!
+                            DBUtils.crearParametre(consulta, "nameFilter", System.Data.DbType.String, "%"+nameFilter+"%");
+                            DBUtils.crearParametre(consulta, "surnameFilter", System.Data.DbType.String, "%" + surnameFilter + "%");
+                            DBUtils.crearParametre(consulta, "lastUpdate", System.Data.DbType.DateTime, lastUpdate);
 
-                            if(nameFilter!=null && !nameFilter.Equals(""))
+                            /*if(nameFilter!=null && !nameFilter.Equals(""))
                             {
-                                consulta.CommandText += " where first_name like '" + nameFilter + "%'";
-                            }
+                                consulta.CommandText += " and first_name like @name_filter";
+                                DbParameter p = consulta.CreateParameter();
+                                p.ParameterName = "name_filter";
+                                p.DbType = System.Data.DbType.String;
+                                p.Value = "%"+nameFilter+"%";
+                                consulta.Parameters.Add(p);
+                            }*/
+
+
                             // B) llançar la consulta
                             DbDataReader reader = consulta.ExecuteReader();
                             // C) recórrer els resultats de la consulta

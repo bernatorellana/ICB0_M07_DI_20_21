@@ -30,12 +30,14 @@ namespace PelisApp
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            dtgActors.ItemsSource = ActorDB.getActors();
+            dtgActors.ItemsSource = ActorDB.getActors("","", new DateTime(2000,1,1));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Filter_Click(object sender, RoutedEventArgs e)
         {
-            dtgActors.ItemsSource = ActorDB.getActors(txtNameFilter.Text);
+            dtgActors.ItemsSource = ActorDB.getActors(txtNameFilter.Text,
+                                                        txtSurnameFilter.Text,
+                                                        dtpPicker.Date.DateTime);
         }
     }
 }
