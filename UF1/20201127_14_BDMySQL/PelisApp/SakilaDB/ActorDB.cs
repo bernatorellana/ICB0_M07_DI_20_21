@@ -28,7 +28,7 @@ namespace SakilaDB
         public DateTime Last_update { get => last_update; set => last_update = value; }
         #endregion
 
-        public static List<ActorDB> getActors(String nameFilter, String surnameFilter, DateTime lastUpdate)
+        public static List<ActorDB> getActors(String nameFilter, String surnameFilter, DateTime lastUpdate, int midaPagina, int numPagina)
         {
             try
             {
@@ -46,6 +46,7 @@ namespace SakilaDB
                                                     (@nameFilter = '%%' or  first_name like @nameFilter ) and
                                                     (@surnameFilter = '%%' or last_name like @surnameFilter) and
                                                     last_update > @lastUpdate
+                                                    limit {numPagina*midaPagina}, {midaPagina}
                                                     ";
                             //                                                                      posem el % per tal que el like funcioni !!
                             DBUtils.crearParametre(consulta, "nameFilter", System.Data.DbType.String, "%"+nameFilter+"%");
@@ -88,6 +89,48 @@ namespace SakilaDB
             }
             return null;
         }
+
+
+        public static int getNumeroActors(String nameFilter, String surnameFilter, DateTime lastUpdate)
+        {
+            Int32 numeroActors = 0;
+            try
+            {
+                using (SakilaDB context = new SakilaDB())
+                {
+                    using (var connexio = context.Database.GetDbConnection())
+                    {
+                        connexio.Open();
+                        using (DbCommand consulta = connexio.CreateCommand())
+                        {
+                            // A) definir la consulta
+                            consulta.CommandText = $@"select count(1) from actor 
+                                                    where
+                                                    (@nameFilter = '%%' or  first_name like @nameFilter ) and
+                                                    (@surnameFilter = '%%' or last_name like @surnameFilter) and
+                                                    last_update > @lastUpdate
+                                                    ";
+                            //                                                                      posem el % per tal que el like funcioni !!
+                            DBUtils.crearParametre(consulta, "nameFilter", System.Data.DbType.String, "%" + nameFilter + "%");
+                            DBUtils.crearParametre(consulta, "surnameFilter", System.Data.DbType.String, "%" + surnameFilter + "%");
+                            DBUtils.crearParametre(consulta, "lastUpdate", System.Data.DbType.DateTime, lastUpdate);
+
+
+
+                            // B) llançar la consulta
+                            var r = consulta.ExecuteScalar();
+                            numeroActors = (Int32)((long)r);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Deixar registre al log (coming soon)
+            }
+            return numeroActors;
+        }
+
 
     }
 }

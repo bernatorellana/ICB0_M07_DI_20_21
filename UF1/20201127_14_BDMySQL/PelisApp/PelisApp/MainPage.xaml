@@ -9,11 +9,16 @@
     mc:Ignorable="d"
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"   Padding="10">
             <Grid.ColumnDefinitions>
@@ -35,5 +40,48 @@
             <Button Grid.Row="3" Grid.Column="1"  Click="Filter_Click"  Width="200" Margin="10" Padding="10" FontSize="30" FontFamily="Segoe MDL2 Assets">&#xE71C;</Button>
         </Grid>
         <controls:DataGrid x:Name="dtgActors" Grid.Row="1"></controls:DataGrid>
+        <CommandBar Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+            <AppBarButton Icon="Previous" x:Name="btnFirst" Click="btnFirst_Click"></AppBarButton>
+
+            <AppBarButton Icon="Play" x:Name="btnPrev" Click="btnPrev_Click">
+                <AppBarButton.RenderTransform>
+                    <ScaleTransform ScaleX="-1" CenterX="30"></ScaleTransform>
+                </AppBarButton.RenderTransform>
+            </AppBarButton>
+            <AppBarButton Content="12" FontSize="18" x:Name="btnPagina"></AppBarButton>
+            <AppBarButton Icon="Play" x:Name="btnNext" Click="btnNext_Click"></AppBarButton>
+            <AppBarButton Icon="Next" x:Name="btnLast" Click="btnLast_Click"></AppBarButton>
+            
+        </CommandBar>
+    </Grid>
+            <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Padding="10">Name:</TextBlock>
+            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtName"></TextBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" Padding="10">Surname:</TextBlock>
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurname"></TextBox>
+            <TextBlock Grid.Row="2" Grid.Column="0" Padding="10">Date:</TextBlock>
+            <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPickerEdicio"></DatePicker>
+            <StackPanel  Grid.Row="3"  Orientation="Horizontal">
+            <Button  Width="200" Margin="10" Padding="10" FontSize="30" 
+                    FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
+            <Button Width="200" Margin="10" Padding="10" FontSize="30" 
+                    FontFamily="Segoe MDL2 Assets">&#xE74D;</Button>
+            <Button   Width="200" Margin="10" Padding="10" FontSize="30" 
+                    FontFamily="Segoe MDL2 Assets">&#xE710;</Button>
+            <Button Width="200" Margin="10" Padding="10" FontSize="30" 
+                    FontFamily="Segoe MDL2 Assets">&#xE711;</Button>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Page>
