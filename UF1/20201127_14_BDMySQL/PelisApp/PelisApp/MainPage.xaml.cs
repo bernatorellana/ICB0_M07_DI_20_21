@@ -21,12 +21,31 @@ namespace PelisApp
     /// <summary>
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
+    /// 
+
+
+
+
     public sealed partial class MainPage : Page
     {
 
         private int itemsPerPagina = 10;
         private int numPagina = 0;
         private int totalPagines = 1;
+
+
+
+
+        public String Test
+        {
+            get { return (String)GetValue(TestProperty); }
+            set { SetValue(TestProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Test.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TestProperty =
+            DependencyProperty.Register("Test", typeof(String), typeof(MainPage), new PropertyMetadata("HOLA"));
+
 
         public MainPage()
         {

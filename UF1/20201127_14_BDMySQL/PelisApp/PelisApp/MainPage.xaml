@@ -56,7 +56,7 @@
     </Grid>
             <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -66,12 +66,12 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Padding="10">Name:</TextBlock>
-            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtName"></TextBox>
+            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtName" Text="{x:Bind Test}"></TextBox>
             <TextBlock Grid.Row="1" Grid.Column="0" Padding="10">Surname:</TextBlock>
             <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurname"></TextBox>
             <TextBlock Grid.Row="2" Grid.Column="0" Padding="10">Date:</TextBlock>
             <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPickerEdicio"></DatePicker>
-            <StackPanel  Grid.Row="3"  Orientation="Horizontal">
+            <StackPanel  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button  Width="200" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
             <Button Width="200" Margin="10" Padding="10" FontSize="30" 
