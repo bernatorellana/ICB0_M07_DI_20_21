@@ -54,10 +54,11 @@
             
         </CommandBar>
     </Grid>
-            <Grid Grid.Column="1">
+    <Grid Grid.Column="1" Padding="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -67,18 +68,20 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Padding="10">Name:</TextBlock>
             <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtName" Text="{x:Bind Test}"></TextBox>
+        
+        
             <TextBlock Grid.Row="1" Grid.Column="0" Padding="10">Surname:</TextBlock>
             <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurname"></TextBox>
             <TextBlock Grid.Row="2" Grid.Column="0" Padding="10">Date:</TextBlock>
             <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPickerEdicio"></DatePicker>
             <StackPanel  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button  Width="200" Margin="10" Padding="10" FontSize="30" 
+            <Button  Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
-            <Button Width="200" Margin="10" Padding="10" FontSize="30" 
+            <Button Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74D;</Button>
-            <Button   Width="200" Margin="10" Padding="10" FontSize="30" 
+            <Button   Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE710;</Button>
-            <Button Width="200" Margin="10" Padding="10" FontSize="30" 
+            <Button Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE711;</Button>
             </StackPanel>
 
