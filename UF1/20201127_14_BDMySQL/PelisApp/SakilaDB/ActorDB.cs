@@ -1,17 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.Common;
 using System.Text;
 
 namespace SakilaDB
 {
-    public class ActorDB
+    public class ActorDB :INotifyPropertyChanged
     {
         private int actor_id;
         private string first_name;
         private string last_name;
         private DateTime last_update;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public ActorDB(int actor_id, string first_name, string last_name, DateTime last_update)
         {
@@ -26,9 +31,10 @@ namespace SakilaDB
         public string First_name { get => first_name; set => first_name = value; }
         public string Last_name { get => last_name; set => last_name = value; }
         public DateTime Last_update { get => last_update; set => last_update = value; }
+
         #endregion
 
-        public static List<ActorDB> getActors(String nameFilter, String surnameFilter, DateTime lastUpdate, int midaPagina, int numPagina)
+        public static ObservableCollection<ActorDB> getActors(String nameFilter, String surnameFilter, DateTime lastUpdate, int midaPagina, int numPagina)
         {
             try
             {
@@ -67,7 +73,7 @@ namespace SakilaDB
                             // B) llançar la consulta
                             DbDataReader reader = consulta.ExecuteReader();
                             // C) recórrer els resultats de la consulta
-                            List<ActorDB> actors = new List<ActorDB>();
+                            ObservableCollection<ActorDB> actors = new ObservableCollection<ActorDB>();
                             while (reader.Read())
                             {
                                 int actor_id = reader.GetInt32(reader.GetOrdinal("actor_id"));
@@ -170,6 +176,53 @@ namespace SakilaDB
                                 return true;
                             }
                             
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Deixar registre al log (coming soon)
+            }
+
+            return false;
+        }
+
+        public bool Insert()
+        {
+            DbTransaction trans = null;
+            try
+            {
+                using (SakilaDB context = new SakilaDB())
+                {
+                    using (var connexio = context.Database.GetDbConnection())
+                    {
+                        connexio.Open();
+                        using (DbCommand consulta = connexio.CreateCommand())
+                        {
+                            trans = connexio.BeginTransaction();
+                            consulta.Transaction = trans;
+                            // A) definir la consulta
+                            consulta.CommandText = $@"
+                                    insert into 
+                                    actor 
+                                    (first_name, last_name, last_update) 
+                                    values (@firstName, @lastName, @lastUpdate)";
+                            DBUtils.crearParametre(consulta, "firstName", System.Data.DbType.String, this.First_name);
+                            DBUtils.crearParametre(consulta, "lastName", System.Data.DbType.String, this.Last_name);
+                            DBUtils.crearParametre(consulta, "lastUpdate", System.Data.DbType.DateTime, this.Last_update);                            
+
+                            // B) llançar la consulta
+                            int filesAfectades = consulta.ExecuteNonQuery();
+                            if (filesAfectades != 1)
+                            {
+                                trans.Rollback();
+                            }
+                            else
+                            {
+                                trans.Commit();
+                                return true;
+                            }
                         }
                     }
                 }

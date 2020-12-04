@@ -99,7 +99,9 @@
                     FontFamily="Segoe MDL2 Assets">&#xE74D;</Button>
                     <Button x:Name="btnNew" RelativePanel.AlignRightWithPanel="True" Click="btnNew_Click"  Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE710;</Button>
-                <Button x:Name="btncancel" Width="100" Margin="10" Padding="10" FontSize="30" 
+                <Button x:Name="btncancel" Click="btncancel_Click"
+                        Margin="10"
+                        RelativePanel.AlignLeftWithPanel="True" Width="100" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE711;</Button>
             </RelativePanel>
 

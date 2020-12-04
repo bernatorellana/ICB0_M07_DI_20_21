@@ -2,6 +2,7 @@
 using SakilaDB;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -33,12 +34,13 @@ namespace PelisApp
         private int itemsPerPagina = 10;
         private int numPagina = 0;
         private int totalPagines = 1;
+        private ObservableCollection<ActorDB> llistaActors;
 
 
         private enum Estat
         {
-            VIEW,
-            EDICIO,
+            SENSE_CANVIS,
+            MODIFICAT,
             NOU
         }
         private Estat estat;
@@ -49,9 +51,9 @@ namespace PelisApp
             set
             {
                 estat = value;
-                btncancel.Visibility = toVisibility(estat != Estat.VIEW);
-                btnSave.Visibility = Visibility.Visible;//btncancel.Visibility;
-                btnDelete.Visibility = toVisibility(estat == Estat.VIEW);
+                btncancel.Visibility = toVisibility(estat != Estat.SENSE_CANVIS);
+                btnSave.Visibility = btncancel.Visibility;
+                btnDelete.Visibility = toVisibility(estat == Estat.SENSE_CANVIS);
                 btnNew.Visibility = btnDelete.Visibility;
             }
         }
@@ -82,7 +84,7 @@ namespace PelisApp
             dtpPicker.Date = new DateTime(2000, 1, 1);
             actualitzaPaginacioDesDelFormulari();
 
-            EstatForm = Estat.VIEW;
+            EstatForm = Estat.SENSE_CANVIS;
             
         }
 
@@ -122,15 +124,16 @@ namespace PelisApp
 
         }
 
+
         private void actualitzaPaginacio(string v1, string v2, DateTime dateTime, int itemsPerPagina, int numPagina)
         {
             int numeroActors = ActorDB.getNumeroActors(v1, v2, dateTime);
-            this.totalPagines =  (int)( Math.Ceiling((double)numeroActors) / itemsPerPagina);
+            this.totalPagines =  (int)( Math.Ceiling((double)numeroActors / itemsPerPagina));
 
-            dtgActors.ItemsSource = ActorDB.getActors(v1,
+            llistaActors = ActorDB.getActors(v1,
                                             v2,
                                             dateTime, itemsPerPagina, numPagina);
-
+            dtgActors.ItemsSource = llistaActors;
 
         }
 
@@ -167,20 +170,70 @@ namespace PelisApp
 
         private void dtgActors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Actor = new ActorViewModel((ActorDB)dtgActors.SelectedItem);
+            crearActorViewModel((ActorDB)dtgActors.SelectedItem);
         }
-
+        private void btncancel_Click(object sender, RoutedEventArgs e)
+        {
+            crearActorViewModel((ActorDB)dtgActors.SelectedItem);
+            EstatForm = Estat.SENSE_CANVIS;
+        }
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            Actor = new ActorViewModel();
+            crearActorViewModel(null);
+            EstatForm = Estat.NOU;
         }
+        private void crearActorViewModel(ActorDB lactor)
+        {
+            if (lactor != null)
+            {
+                Actor = new ActorViewModel(lactor);
+            } else
+            {
+                Actor = new ActorViewModel();
+            }
+            // Ens registrem  a l'event property changed 
+            // Si l'objecte Actor és modificat (via binding de la interfície
+            // gràfica ), ens avisarà.
+            Actor.PropertyChanged += Actor_PropertyChanged;
+        }
+        
+        private void Actor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (EstatForm == Estat.SENSE_CANVIS)
+            {
+                EstatForm = Estat.MODIFICAT;
+            }
+        }
+
+
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             //fer validacions.....
-
-            ActorDB aBD = new ActorDB(Actor.Actor_id, Actor.First_name, Actor.Last_name, Actor.Last_update.DateTime);
-            aBD.Update();
+            //@TODO 
+            if (EstatForm != Estat.NOU)
+            {
+                // estic modificant
+                
+                ActorDB aDB = (ActorDB)dtgActors.SelectedItem;
+                if (aDB != null)
+                {
+                    aDB.First_name = Actor.First_name;
+                    aDB.Last_name = Actor.Last_name;
+                    aDB.Last_update = Actor.Last_update.DateTime;
+                    aDB.Update();
+                }
+            } else
+            {
+                // estic en el cas de Nou actor
+                ActorDB aBD = new ActorDB(-1, Actor.First_name, Actor.Last_name, Actor.Last_update.DateTime);               
+                aBD.Insert();
+                //this.llistaActors.Add(aBD);
+                actualitzaPaginacioDesDelFormulari();
+            }
+            EstatForm = Estat.SENSE_CANVIS;
         }
+
+
     }
 }

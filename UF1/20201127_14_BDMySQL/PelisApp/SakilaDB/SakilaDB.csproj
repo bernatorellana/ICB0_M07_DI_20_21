@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.7" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.4.0" />
   </ItemGroup>
 
 </Project>
