@@ -131,6 +131,55 @@ namespace SakilaDB
             return numeroActors;
         }
 
+        public bool Update()
+        {
+            DbTransaction trans = null;
+            try
+            {
+                using (SakilaDB context = new SakilaDB())
+                {
+                    using (var connexio = context.Database.GetDbConnection())
+                    {
+                        connexio.Open();
+                        using (DbCommand consulta = connexio.CreateCommand())
+                        {
+                            trans = connexio.BeginTransaction();
+                            consulta.Transaction = trans;
+                            // A) definir la consulta
+                            consulta.CommandText = $@"
+                                    update actor  
+	                                    set first_name = @firstName,
+	                                    last_name = @lastName,
+	                                    last_update =@lastUpdate
+                                     where actor_id= @actorId";
+                            DBUtils.crearParametre(consulta, "firstName", System.Data.DbType.String, this.First_name);
+                            DBUtils.crearParametre(consulta, "lastName", System.Data.DbType.String, this.Last_name);
+                            DBUtils.crearParametre(consulta, "lastUpdate", System.Data.DbType.DateTime, this.Last_update);
+                            DBUtils.crearParametre(consulta, "actorId", System.Data.DbType.Int32, this.Actor_id);
 
+
+
+                            // B) llançar la consulta
+                            int  filesAfectades = consulta.ExecuteNonQuery();
+                            if(filesAfectades!=1)
+                            {
+                                trans.Rollback();
+                            } else
+                            {
+                                trans.Commit();
+                                return true;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Deixar registre al log (coming soon)
+            }
+
+            return false;
+        }
     }
 }

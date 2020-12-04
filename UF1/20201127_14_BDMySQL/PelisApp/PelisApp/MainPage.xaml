@@ -6,55 +6,67 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:view="using:PelisApp.View"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
+    x:Name="pagMain"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0"   Padding="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Padding="10">Name:</TextBlock>
-            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtNameFilter"></TextBox>
-            <TextBlock Grid.Row="1" Grid.Column="0" Padding="10">Surname:</TextBlock>
-            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurnameFilter"></TextBox>
-            <TextBlock Grid.Row="2" Grid.Column="0" Padding="10">Date:</TextBlock>
-            <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPicker"></DatePicker>
-            <Button Grid.Row="3" Grid.Column="1"  Click="Filter_Click"  Width="200" Margin="10" Padding="10" FontSize="30" FontFamily="Segoe MDL2 Assets">&#xE71C;</Button>
-        </Grid>
-        <controls:DataGrid x:Name="dtgActors" Grid.Row="1"></controls:DataGrid>
-        <CommandBar Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
-            <AppBarButton Icon="Previous" x:Name="btnFirst" Click="btnFirst_Click"></AppBarButton>
+            <Border Grid.Row="0" Padding="10">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEAEAEA"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid   Padding="10" RowSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Padding="10">Name:</TextBlock>
+                    <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtNameFilter"></TextBox>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Padding="10">Surname:</TextBlock>
+                    <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurnameFilter"></TextBox>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Padding="10">Date:</TextBlock>
+                    <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPicker"></DatePicker>
+                    <Button HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1"  Click="Filter_Click"  Width="200" Margin="10" Padding="10" FontSize="30" FontFamily="Segoe MDL2 Assets">&#xE71C;</Button>
+                </Grid>
+            </Border>
+            <controls:DataGrid x:Name="dtgActors" Grid.Row="1" SelectionChanged="dtgActors_SelectionChanged"></controls:DataGrid>
+            <CommandBar Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+                <AppBarButton Icon="Previous" x:Name="btnFirst" Click="btnFirst_Click"></AppBarButton>
 
-            <AppBarButton Icon="Play" x:Name="btnPrev" Click="btnPrev_Click">
-                <AppBarButton.RenderTransform>
-                    <ScaleTransform ScaleX="-1" CenterX="30"></ScaleTransform>
-                </AppBarButton.RenderTransform>
-            </AppBarButton>
-            <AppBarButton Content="12" FontSize="18" x:Name="btnPagina"></AppBarButton>
-            <AppBarButton Icon="Play" x:Name="btnNext" Click="btnNext_Click"></AppBarButton>
-            <AppBarButton Icon="Next" x:Name="btnLast" Click="btnLast_Click"></AppBarButton>
-            
-        </CommandBar>
-    </Grid>
-    <Grid Grid.Column="1" Padding="20">
+                <AppBarButton Icon="Play" x:Name="btnPrev" Click="btnPrev_Click">
+                    <AppBarButton.RenderTransform>
+                        <ScaleTransform ScaleX="-1" CenterX="30"></ScaleTransform>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton Content="12" FontSize="18" x:Name="btnPagina"></AppBarButton>
+                <AppBarButton Icon="Play" x:Name="btnNext" Click="btnNext_Click"></AppBarButton>
+                <AppBarButton Icon="Next" x:Name="btnLast" Click="btnLast_Click"></AppBarButton>
+
+            </CommandBar>
+        </Grid>
+        <Border Grid.Column="1" VerticalAlignment="Center" Padding="20" Margin="20"
+                BorderThickness="1" BorderBrush="#FFD9D9D9">
+            <Grid  Padding="20" RowSpacing="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -67,24 +79,31 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Padding="10">Name:</TextBlock>
-            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtName" Text="{x:Bind Test}"></TextBox>
-        
-        
+            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtName" Text="{Binding ElementName=pagMain, Path=Actor.First_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <view:UIMissatgeValidacio Grid.Row="0" Grid.Column="2" IsError="False" Message="El nom ha de tenir 5 caràcters"></view:UIMissatgeValidacio>
+
             <TextBlock Grid.Row="1" Grid.Column="0" Padding="10">Surname:</TextBlock>
-            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurname"></TextBox>
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtSurname" Text="{Binding ElementName=pagMain, Path=Actor.Last_name , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <view:UIMissatgeValidacio Grid.Row="1" Grid.Column="2" IsError="False" Message="El cognom ha de tenir 5 caràcters"></view:UIMissatgeValidacio>
+
             <TextBlock Grid.Row="2" Grid.Column="0" Padding="10">Date:</TextBlock>
-            <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPickerEdicio"></DatePicker>
-            <StackPanel  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button  Width="100" Margin="10" Padding="10" FontSize="30" 
+            <DatePicker  Grid.Row="2" Grid.Column="1" x:Name="dtpPickerEdicio"
+                         Date="{Binding ElementName=pagMain, Path=Actor.Last_update , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         ></DatePicker>
+            <view:UIMissatgeValidacio Grid.Row="2" Grid.Column="2" IsError="False" Message="La data ha de ser futura"></view:UIMissatgeValidacio>
+
+            <RelativePanel   Grid.Row="3" Grid.ColumnSpan="3" >
+                <Button x:Name="btnSave" RelativePanel.AlignRightWithPanel="True" Click="btnSave_Click" Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
-            <Button Width="100" Margin="10" Padding="10" FontSize="30" 
+                <Button x:Name="btnDelete" Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74D;</Button>
-            <Button   Width="100" Margin="10" Padding="10" FontSize="30" 
+                    <Button x:Name="btnNew" RelativePanel.AlignRightWithPanel="True" Click="btnNew_Click"  Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE710;</Button>
-            <Button Width="100" Margin="10" Padding="10" FontSize="30" 
+                <Button x:Name="btncancel" Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE711;</Button>
-            </StackPanel>
+            </RelativePanel>
 
         </Grid>
+        </Border>
     </Grid>
 </Page>

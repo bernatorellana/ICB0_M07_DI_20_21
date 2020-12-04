@@ -8,8 +8,14 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
+    <UserControl.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></local:BooleanToVisibilityConverter>
+        <local:NegatedBooleanToVisibilityConverter x:Key="NegatedBooleanToVisibilityConverter"></local:NegatedBooleanToVisibilityConverter>
+    </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal">
-        <
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Padding="3">
+        <Image Width="20" Height="20" Visibility="{x:Bind IsError,Converter={StaticResource BooleanToVisibilityConverter}}" Source="ms-appx:///Assets/error.png" Margin="0 0 10 0"/>
+        <Image Width="20" Height="20" Visibility="{x:Bind IsError,Converter={StaticResource NegatedBooleanToVisibilityConverter}}" Source="ms-appx:///Assets/info.png" Margin="0 0 10 0"/>
+        <TextBlock Text="{x:Bind Message}"></TextBlock>
     </StackPanel>
 </UserControl>

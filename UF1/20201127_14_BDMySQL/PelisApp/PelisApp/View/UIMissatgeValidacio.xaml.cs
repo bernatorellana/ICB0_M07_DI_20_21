@@ -23,5 +23,30 @@ namespace PelisApp.View
         {
             this.InitializeComponent();
         }
+
+
+
+        public String Message
+        {
+            get { return (String)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Message.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(String), typeof(UIMissatgeValidacio), new PropertyMetadata(""));
+
+
+        public bool IsError
+        {
+            get { return (bool)GetValue(IsErrorProperty); }
+            set { SetValue(IsErrorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsError.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsErrorProperty =
+            DependencyProperty.Register("IsError", typeof(bool), typeof(UIMissatgeValidacio), new PropertyMetadata(false));
+
+
     }
 }
