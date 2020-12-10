@@ -188,6 +188,52 @@ namespace SakilaDB
             return false;
         }
 
+        public bool delete()
+        {
+            DbTransaction trans = null;
+            try
+            {
+                using (SakilaDB context = new SakilaDB())
+                {
+                    using (var connexio = context.Database.GetDbConnection())
+                    {
+                        connexio.Open();
+                        using (DbCommand consulta = connexio.CreateCommand())
+                        {
+                            trans = connexio.BeginTransaction();
+                            consulta.Transaction = trans;
+                            //delete from film_actor where actor_id=5
+                            //delete from actor where actor_id = 5
+              
+                            // Esborrem les participacions de l'actor en diferents pel·lícules.
+                            consulta.CommandText = $@"delete from film_actor where actor_id= @actorId";
+                            DBUtils.crearParametre(consulta, "actorId", System.Data.DbType.Int32, this.Actor_id);
+                            int filesAfectades = consulta.ExecuteNonQuery();
+                            consulta.CommandText = $@"delete from actor where actor_id= @actorId";
+                            filesAfectades = consulta.ExecuteNonQuery();
+
+                            if (filesAfectades != 1)
+                            {
+                                trans.Rollback();
+                            }
+                            else
+                            {
+                                trans.Commit();
+                                return true;
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Deixar registre al log (coming soon)
+            }
+
+            return false;
+        }
+
         public bool Insert()
         {
             DbTransaction trans = null;

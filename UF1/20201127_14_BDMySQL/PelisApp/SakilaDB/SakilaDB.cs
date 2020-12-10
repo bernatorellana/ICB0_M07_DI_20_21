@@ -11,7 +11,8 @@ namespace SakilaDB
             DbContextOptionsBuilder optionBuilder
             )
         {
-            optionBuilder.UseMySQL("Server=localhost;Database=sakila;UID=root;Password=informatica");
+            optionBuilder.UseMySQL(
+                "Server=localhost;Database=sakila;UID=root;Password=informatica");
         }
     }
 }

@@ -95,7 +95,9 @@
             <RelativePanel   Grid.Row="3" Grid.ColumnSpan="3" >
                 <Button x:Name="btnSave" RelativePanel.AlignRightWithPanel="True" Click="btnSave_Click" Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
-                <Button x:Name="btnDelete" Width="100" Margin="10" Padding="10" FontSize="30" 
+                <Button x:Name="btnDelete" Click="btnDelete_Click" 
+                        IsEnabled="False"
+                        Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74D;</Button>
                     <Button x:Name="btnNew" RelativePanel.AlignRightWithPanel="True" Click="btnNew_Click"  Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE710;</Button>

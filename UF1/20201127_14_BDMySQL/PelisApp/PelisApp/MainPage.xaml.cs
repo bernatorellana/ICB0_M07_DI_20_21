@@ -55,6 +55,8 @@ namespace PelisApp
                 btnSave.Visibility = btncancel.Visibility;
                 btnDelete.Visibility = toVisibility(estat == Estat.SENSE_CANVIS);
                 btnNew.Visibility = btnDelete.Visibility;
+
+
             }
         }
 
@@ -171,6 +173,7 @@ namespace PelisApp
         private void dtgActors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             crearActorViewModel((ActorDB)dtgActors.SelectedItem);
+            btnDelete.IsEnabled = dtgActors.SelectedItem != null;
         }
         private void btncancel_Click(object sender, RoutedEventArgs e)
         {
@@ -234,13 +237,44 @@ namespace PelisApp
             EstatForm = Estat.SENSE_CANVIS;
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
 
              if(dtgActors.SelectedItem!=null)
             {
                 ActorDB a =  (ActorDB) dtgActors.SelectedItem;
+                int numeroPelisActor = a.getNumeroDePelis();
+                Boolean esborra = false;
+                if(numeroPelisActor>0)
+                {
+                    ContentDialog deleteActorDialog = new ContentDialog
+                    {
+                        Title = "Aquest actor té pel·lícules registrades al seu nom. ",
+                        Content = "Vol esborrar l'actor i totes les seves referències?",
+                        PrimaryButtonText = "Esborrar",
+                        CloseButtonText = "Cancel·lar"
+                    };
+
+                    ContentDialogResult result = await deleteActorDialog.ShowAsync();
+
+                    // Delete the file if the user clicked the primary button.
+                    /// Otherwise, do nothing.
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        esborra = true;
+                    }
+                } else
+                { // 0 pelis
+                    esborra = true;
+                }
+                
+                if (esborra && a.delete())
+                {
+                    actualitzaPaginacioDesDelFormulari();
+                }
             }
         }
-    }
-}
+
+         
+    }// class
+}//namespace
