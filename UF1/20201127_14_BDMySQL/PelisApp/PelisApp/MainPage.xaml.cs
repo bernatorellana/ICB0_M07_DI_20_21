@@ -234,6 +234,13 @@ namespace PelisApp
             EstatForm = Estat.SENSE_CANVIS;
         }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
 
+             if(dtgActors.SelectedItem!=null)
+            {
+                ActorDB a =  (ActorDB) dtgActors.SelectedItem;
+            }
+        }
     }
 }
