@@ -96,7 +96,7 @@
                          ></DatePicker>
             <view:UIMissatgeValidacio Grid.Row="2" Grid.Column="2" IsError="False" Message="La data ha de ser futura"></view:UIMissatgeValidacio>
 
-            <RelativePanel   Grid.Row="2" Grid.ColumnSpan="3" >
+            <RelativePanel   Grid.Row="3" Grid.ColumnSpan="3" >
                 <Button x:Name="btnSave" RelativePanel.AlignRightWithPanel="True" Click="btnSave_Click" Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
                 <Button x:Name="btnDelete" Click="btnDelete_Click" 
@@ -113,8 +113,43 @@
 
         </Grid>
         </Border>
-        <controls:DataGrid x:Name="dtgFilms" Grid.Column="1" Grid.Row="1" Background="LightGray">
-            
+        <controls:DataGrid x:Name="dtgFilms"
+                           FontSize="7" 
+                           AutoGenerateColumns="False"
+                           Grid.Column="1" 
+                           Grid.Row="1" Background="LightGray">
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn 
+                    Header="Id" 
+                Width="SizeToHeader"
+                Binding="{Binding Film_id}" 
+                FontSize="12"/>
+                <controls:DataGridTextColumn 
+                    Header="Title" 
+                Width="SizeToCells"
+                Binding="{Binding Title}" 
+                FontSize="12"/>
+                <controls:DataGridTextColumn 
+                    Header="Desc." 
+                Width="SizeToCells"
+                Binding="{Binding DescriptionShort}" 
+                FontSize="12"/>
+                <controls:DataGridTextColumn 
+                    Header="Release_year" 
+                Width="SizeToCells"
+                Binding="{Binding Release_year}" 
+                FontSize="12"/>
+                <controls:DataGridTextColumn 
+                    Header="Language" 
+                Width="SizeToCells"
+                Binding="{Binding Languages}" 
+                FontSize="12"/>
+                <controls:DataGridTextColumn 
+                    Header="Rating" 
+                Width="SizeToCells"
+                Binding="{Binding Rating}" 
+                FontSize="12"/>
+            </controls:DataGrid.Columns>
         </controls:DataGrid>
     </Grid>
 </Page>

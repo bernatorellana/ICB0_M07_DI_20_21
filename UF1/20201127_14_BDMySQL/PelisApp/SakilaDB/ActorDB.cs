@@ -49,6 +49,8 @@ namespace SakilaDB
 
                         using (DbCommand consulta = connexio.CreateCommand())
                         {
+                            // (select count(1) from film_actor fa where a.actor_id=fa.actor_id) as num_pelis
+
                             // A) definir la consulta
                             consulta.CommandText = $@"select * from actor 
                                                     where

@@ -31,6 +31,18 @@ namespace SakilaDB
         public int Film_id { get => film_id; set => film_id = value; }
         public string Title { get => title; set => title = value; }
         public string Description { get => description; set => description = value; }
+
+        public string DescriptionShort
+        {
+            get
+            {
+                if (Description.Length > 20)
+                {
+                    return Description.Substring(0, 20)+"...";
+                }
+                else return Description;
+            }
+        }
         public int Release_year { get => release_year; set => release_year = value; }
         public string Languages { get => languages; set => languages = value; }
         public string Rating { get => rating; set => rating = value; }
