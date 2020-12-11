@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Easy.Logger" Version="3.7.4" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.7" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.4.0" />
   </ItemGroup>

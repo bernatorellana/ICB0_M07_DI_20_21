@@ -174,6 +174,12 @@ namespace PelisApp
         {
             crearActorViewModel((ActorDB)dtgActors.SelectedItem);
             btnDelete.IsEnabled = dtgActors.SelectedItem != null;
+            if(dtgActors.SelectedItem != null)
+            {
+                ActorDB a = (ActorDB)dtgActors.SelectedItem;
+                ObservableCollection<FilmDB> films =  FilmDB.getFilms(a.Actor_id);
+                dtgFilms.ItemsSource = films;
+            }
         }
         private void btncancel_Click(object sender, RoutedEventArgs e)
         {
@@ -267,10 +273,13 @@ namespace PelisApp
                 { // 0 pelis
                     esborra = true;
                 }
-                
-                if (esborra && a.delete())
+
+                if (esborra)
                 {
-                    actualitzaPaginacioDesDelFormulari();
+                    if(a.delete())
+                    {
+                        actualitzaPaginacioDesDelFormulari();
+                    }
                 }
             }
         }

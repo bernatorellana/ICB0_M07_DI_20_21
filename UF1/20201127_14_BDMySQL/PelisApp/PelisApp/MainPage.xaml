@@ -16,7 +16,11 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -92,7 +96,7 @@
                          ></DatePicker>
             <view:UIMissatgeValidacio Grid.Row="2" Grid.Column="2" IsError="False" Message="La data ha de ser futura"></view:UIMissatgeValidacio>
 
-            <RelativePanel   Grid.Row="3" Grid.ColumnSpan="3" >
+            <RelativePanel   Grid.Row="2" Grid.ColumnSpan="3" >
                 <Button x:Name="btnSave" RelativePanel.AlignRightWithPanel="True" Click="btnSave_Click" Width="100" Margin="10" Padding="10" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets">&#xE74E;</Button>
                 <Button x:Name="btnDelete" Click="btnDelete_Click" 
@@ -109,5 +113,8 @@
 
         </Grid>
         </Border>
+        <controls:DataGrid x:Name="dtgFilms" Grid.Column="1" Grid.Row="1" Background="LightGray">
+            
+        </controls:DataGrid>
     </Grid>
 </Page>

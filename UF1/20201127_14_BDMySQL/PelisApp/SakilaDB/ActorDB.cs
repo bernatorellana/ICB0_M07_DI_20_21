@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Easy.Logger;
+using Easy.Logger.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,6 +38,7 @@ namespace SakilaDB
 
         public static ObservableCollection<ActorDB> getActors(String nameFilter, String surnameFilter, DateTime lastUpdate, int midaPagina, int numPagina)
         {
+
             try
             {
                 using (SakilaDB context = new SakilaDB())
@@ -186,6 +189,39 @@ namespace SakilaDB
             }
 
             return false;
+        }
+
+        public int getNumeroDePelis()
+        {
+            Int32 numeroPelis = 0;
+            try
+            {
+                using (SakilaDB context = new SakilaDB())
+                {
+                    using (var connexio = context.Database.GetDbConnection())
+                    {
+                        connexio.Open();
+                        using (DbCommand consulta = connexio.CreateCommand())
+                        {
+                            // A) definir la consulta
+                            consulta.CommandText = $@"select count(1) from film_actor where actor_id=@actorId";
+                            //                                                                      posem el % per tal que el like funcioni !!
+                            DBUtils.crearParametre(consulta, "actorId", System.Data.DbType.Int32, this.Actor_id);
+                            
+                            // B) llançar la consulta
+                            var r = consulta.ExecuteScalar();
+                            numeroPelis = (Int32)((long)r);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+                // Deixar registre al log (coming soon)
+            }
+            return numeroPelis;
         }
 
         public bool delete()
