@@ -127,26 +127,31 @@
                 <controls:DataGridTextColumn 
                     Header="Title" 
                 Width="SizeToCells"
+                    MinWidth="100"
                 Binding="{Binding Title}" 
                 FontSize="12"/>
                 <controls:DataGridTextColumn 
                     Header="Desc." 
                 Width="SizeToCells"
+                    MinWidth="100"
                 Binding="{Binding DescriptionShort}" 
                 FontSize="12"/>
                 <controls:DataGridTextColumn 
                     Header="Release_year" 
                 Width="SizeToCells"
+                    MinWidth="100"
                 Binding="{Binding Release_year}" 
                 FontSize="12"/>
                 <controls:DataGridTextColumn 
                     Header="Language" 
                 Width="SizeToCells"
+                    MinWidth="100"
                 Binding="{Binding Languages}" 
                 FontSize="12"/>
                 <controls:DataGridTextColumn 
                     Header="Rating" 
                 Width="SizeToCells"
+                    MinWidth="100"
                 Binding="{Binding Rating}" 
                 FontSize="12"/>
             </controls:DataGrid.Columns>

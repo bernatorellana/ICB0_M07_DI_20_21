@@ -1,11 +1,13 @@
 ﻿using Easy.Logger;
 using Easy.Logger.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace SakilaDB
@@ -16,23 +18,27 @@ namespace SakilaDB
         private string first_name;
         private string last_name;
         private DateTime last_update;
+        private int num_pelis; // virtual
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public ActorDB(int actor_id, string first_name, string last_name, DateTime last_update)
+        public ActorDB(int actor_id, string first_name, string last_name, DateTime last_update, int num_pelis)
         {
             this.Actor_id = actor_id;
             this.First_name = first_name;
             this.Last_name = last_name;
             this.Last_update = last_update;
-           
+            this.Num_pelis = num_pelis;
+
+
         }
         #region propietats
         public int Actor_id { get => actor_id; set => actor_id = value; }
         public string First_name { get => first_name; set => first_name = value; }
         public string Last_name { get => last_name; set => last_name = value; }
         public DateTime Last_update { get => last_update; set => last_update = value; }
+        public int Num_pelis { get => num_pelis; set => num_pelis = value; }
 
         #endregion
 
@@ -52,13 +58,37 @@ namespace SakilaDB
                             // (select count(1) from film_actor fa where a.actor_id=fa.actor_id) as num_pelis
 
                             // A) definir la consulta
-                            consulta.CommandText = $@"select * from actor 
+                            /*consulta.CommandText = $@"select a.*,
+                                                    (select count(1) from film_actor fa where a.actor_id=fa.actor_id) as num_pelis
+                                                    from actor a
                                                     where
                                                     (@nameFilter = '%%' or  first_name like @nameFilter ) and
                                                     (@surnameFilter = '%%' or last_name like @surnameFilter) and
                                                     last_update > @lastUpdate
                                                     limit {numPagina*midaPagina}, {midaPagina}
+                                                    ";*/
+
+
+                            /**
+                                * En aquest cas usarem una vista creada al MySQL:
+                                 create or replace view ext_actor as
+                                    select a.*, 
+                                   (select count(1) from film_actor fa where a.actor_id=fa.actor_id) as num_pelis
+                                    from actor a
+
+                               */
+                            consulta.CommandText = $@"select a.*
+                                                    from ext_actor a
+                                                    where
+                                                    (@nameFilter = '%%' or  first_name like @nameFilter ) and
+                                                    (@surnameFilter = '%%' or last_name like @surnameFilter) and
+                                                    last_update > @lastUpdate
+                                                    limit {numPagina * midaPagina}, {midaPagina}
                                                     ";
+
+
+   
+
                             //                                                                      posem el % per tal que el like funcioni !!
                             DBUtils.crearParametre(consulta, "nameFilter", System.Data.DbType.String, "%"+nameFilter+"%");
                             DBUtils.crearParametre(consulta, "surnameFilter", System.Data.DbType.String, "%" + surnameFilter + "%");
@@ -85,8 +115,9 @@ namespace SakilaDB
                                 string first_name = reader.GetString(reader.GetOrdinal("first_name"));
                                 string last_name = reader.GetString(reader.GetOrdinal("last_name"));
                                 DateTime last_update = reader.GetDateTime(reader.GetOrdinal("last_update"));
+                                int num_pelis = reader.GetInt32(reader.GetOrdinal("num_pelis"));
                                 // Creem un actor
-                                ActorDB a = new ActorDB(actor_id, first_name, last_name, last_update);
+                                ActorDB a = new ActorDB(actor_id, first_name, last_name, last_update, num_pelis);
                                 actors.Add(a);
                             }
                             return actors;
@@ -271,6 +302,46 @@ namespace SakilaDB
 
             return false;
         }
+        public bool deleteStoredProcedure()
+        {
+            DbTransaction trans = null;
+            try
+            {
+                using (SakilaDB context = new SakilaDB())
+                {
+                    using (var connexio = context.Database.GetDbConnection())
+                    {
+                        connexio.Open();
+
+                        using (DbCommand consulta = connexio.CreateCommand())
+                        {
+                            trans = connexio.BeginTransaction();
+                            consulta.Transaction = trans;
+
+                            // Esborrem les participacions de l'actor en diferents pel·lícules.
+                            consulta.CommandText = $@"delete_actor";
+                            // Hem de dir-li que estem executant un StoredProcedure !!
+                            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                            DBUtils.crearParametre(consulta, "ACTOR_ID_P", System.Data.DbType.Int32, this.Actor_id);
+                            consulta.ExecuteNonQuery();
+                            trans.Commit();
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Deixar registre al log (coming soon)
+                trans.Rollback();
+            }
+
+            return false;
+        }
+
+
+
+
 
         public bool Insert()
         {

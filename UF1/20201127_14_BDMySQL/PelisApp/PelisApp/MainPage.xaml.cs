@@ -235,7 +235,7 @@ namespace PelisApp
             } else
             {
                 // estic en el cas de Nou actor
-                ActorDB aBD = new ActorDB(-1, Actor.First_name, Actor.Last_name, Actor.Last_update.DateTime);               
+                ActorDB aBD = new ActorDB(-1, Actor.First_name, Actor.Last_name, Actor.Last_update.DateTime, 0);               
                 aBD.Insert();
                 //this.llistaActors.Add(aBD);
                 actualitzaPaginacioDesDelFormulari();
@@ -276,7 +276,7 @@ namespace PelisApp
 
                 if (esborra)
                 {
-                    if(a.delete())
+                    if(a.deleteStoredProcedure())//delete())
                     {
                         actualitzaPaginacioDesDelFormulari();
                     }
