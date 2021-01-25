@@ -6,10 +6,13 @@
         xmlns:local="clr-namespace:_20210118_DemoDocumentacio"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel Orientation="Horizontal" Height="20">
-        <TextBox x:Name="txtOp1" Width="50"></TextBox>
-        <TextBox x:Name="txtOp2" Width="50"></TextBox>
-        <Button x:Name="btnProva" Content="Suma=" Click="btnProva_Click" ></Button>
-        <TextBox x:Name="txtResultat" Width="50"></TextBox>
-    </StackPanel>
+  
+        <StackPanel Orientation="Horizontal" Height="20">
+            <TextBox x:Name="txtOp1" Width="50"></TextBox>
+            <TextBox x:Name="txtOp2" Width="50"></TextBox>
+            <Button x:Name="btnProva" Content="Suma=" Click="btnProva_Click" ></Button>
+            <TextBox x:Name="txtResultat" Width="50"></TextBox>
+   
+        </StackPanel>
+       
 </Window>

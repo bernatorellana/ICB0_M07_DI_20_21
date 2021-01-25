@@ -11,6 +11,16 @@ namespace _20210118_DemoDocumentacio.model
     /// </summary>
     public  class Vehicle
     {
+
+        public static List<Vehicle> GetVehicles()
+        {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            vehicles.Add(new Vehicle("333XXX", 22222222, "Seat", "Leon"));
+            vehicles.Add(new Vehicle("333TTR", 33333321, "Seat", "Ibiza"));
+            vehicles.Add(new Vehicle("5234HGH", 422323, "Porsche", "Panamera"));
+            return vehicles;
+        }
+
         private String matricula;
         private long numeroBastidor;
         private String marca;

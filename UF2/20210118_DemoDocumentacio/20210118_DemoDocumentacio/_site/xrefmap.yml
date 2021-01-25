@@ -57,6 +57,19 @@ references:
   isSpec: "True"
   fullName: _20210118_DemoDocumentacio.model.Vehicle.Vehicle
   nameWithType: Vehicle.Vehicle
+- uid: _20210118_DemoDocumentacio.model.Vehicle.GetVehicles
+  name: GetVehicles()
+  href: api/_20210118_DemoDocumentacio.model.Vehicle.html#_20210118_DemoDocumentacio_model_Vehicle_GetVehicles
+  commentId: M:_20210118_DemoDocumentacio.model.Vehicle.GetVehicles
+  fullName: _20210118_DemoDocumentacio.model.Vehicle.GetVehicles()
+  nameWithType: Vehicle.GetVehicles()
+- uid: _20210118_DemoDocumentacio.model.Vehicle.GetVehicles*
+  name: GetVehicles
+  href: api/_20210118_DemoDocumentacio.model.Vehicle.html#_20210118_DemoDocumentacio_model_Vehicle_GetVehicles_
+  commentId: Overload:_20210118_DemoDocumentacio.model.Vehicle.GetVehicles
+  isSpec: "True"
+  fullName: _20210118_DemoDocumentacio.model.Vehicle.GetVehicles
+  nameWithType: Vehicle.GetVehicles
 - uid: _20210118_DemoDocumentacio.model.Vehicle.Marca
   name: Marca
   href: api/_20210118_DemoDocumentacio.model.Vehicle.html#_20210118_DemoDocumentacio_model_Vehicle_Marca

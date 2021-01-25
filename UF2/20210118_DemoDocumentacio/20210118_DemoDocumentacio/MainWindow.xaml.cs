@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _20210118_DemoDocumentacio.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace _20210118_DemoDocumentacio
         public MainWindow()
         {
             InitializeComponent();
+            dtgVehicles.ItemsSource = Vehicle.GetVehicles();
         }
 
         private void btnProva_Click(object sender, RoutedEventArgs e)

@@ -26,9 +26,7 @@ namespace ProjecteTesting
 
             TextBox txtResultat = w.Get<TextBox>("txtResultat");
             Assert.AreEqual(7, Int32.Parse( txtResultat.Text) );
-
-             
-
+ 
         }
     }
 }
