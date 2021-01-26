@@ -6,13 +6,37 @@
         xmlns:local="clr-namespace:_20210118_DemoDocumentacio"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-  
-        <StackPanel Orientation="Horizontal" Height="20">
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" Height="20" Margin="20">
             <TextBox x:Name="txtOp1" Width="50"></TextBox>
             <TextBox x:Name="txtOp2" Width="50"></TextBox>
             <Button x:Name="btnProva" Content="Suma=" Click="btnProva_Click" ></Button>
             <TextBox x:Name="txtResultat" Width="50"></TextBox>
    
         </StackPanel>
-       
+
+        <StackPanel Orientation="Horizontal">
+            <DataGrid x:Name="dtgVehicles" Width="400"></DataGrid>
+            <Grid  Width="400" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Matricula" Grid.Column="0" Grid.Row="0"></TextBlock>
+                <TextBox x:Name="txtMatricula" 
+                         Text="{Binding ElementName=dtgVehicles, Path=SelectedValue.Matricula}"
+                         Grid.Column="1" Grid.Row="0"></TextBox>
+                <TextBlock Text="Marca" Grid.Column="0" Grid.Row="1"></TextBlock>
+                <TextBox x:Name="txtMarca" 
+                         Text="{Binding ElementName=dtgVehicles, Path=SelectedValue.Marca}"
+                         Grid.Column="1" Grid.Row="1"></TextBox>
+
+            </Grid>
+        </StackPanel>
+        
+    </StackPanel>
 </Window>
