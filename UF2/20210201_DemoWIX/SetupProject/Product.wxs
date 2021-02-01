@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="SuperDuperProgram" 
+			 Language="1033" 
+			 Version="1.0.0.0" Manufacturer="Mila i fontanals" 
+			 UpgradeCode="209942be-5cd8-40c1-9768-5f5637477542">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="FEAT_PROGRAMA" Title="SuperDuper App" Level="1">
+			<ComponentGroupRef Id="CGR_PROGRAMA" />
+		</Feature>
+		<Feature Id="FEAT_DOCUMENTACIO" Title="Documentacio" Level="2">
+			<ComponentGroupRef Id="CGR_DOCUMENTACIO"/>
+		</Feature>
+		<!-- Activem la interfície gràfica -->
+		<UIRef Id="WixUI_Mondo"/>
+		<UIRef Id="WixUI_ErrorProgressText"/>
+		<Property Id="WIXUI_INSTALLDIR"
+		Value="INSTALLDIR"></Property>		
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SuperDuperApp" >
+					<Directory Id="DIR_DOC" Name="Documentacio"></Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="CGR_PROGRAMA" Directory="INSTALLFOLDER">
+			<Component Id="CMP_exe" Guid="{172d6875-01ba-4937-93d6-47a5e338491f}">
+				<File Id="FILE_executable" Source="$(var.20210118_DemoDocumentacio.TargetDir)/20210118_DemoDocumentacio.exe"></File>
+			</Component>
+		</ComponentGroup>
+		<!-- *********************************** -->
+		<ComponentGroup Id="CGR_DOCUMENTACIO" Directory="DIR_DOC">
+			<Component Id="CMP_how_to_setup_md"
+					   Guid="{04957d0f-2ec6-4f9e-b0f5-1ee676f02318}">
+				<File Id="FILE_how_to_setup_md" 
+					  Source="$(var.20210118_DemoDocumentacio.ProjectDir)/articles/how_to_setup.md"></File>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
